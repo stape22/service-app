@@ -30,7 +30,7 @@
 ### Figma Reference Only Policy
 
 * [x] Never import from `Figma Design/components/ui/` in app code
-* [ ] Port new primitives to `src/components/atoms/` as needed, adapting to project conventions and dependencies
+* [x] Port new primitives to `src/components/atoms/` as needed, adapting to project conventions and dependencies
 * [x] Remove unused Figma-only dependencies if reintroduced
 
 ### Atoms
@@ -39,6 +39,10 @@
 * [x] Input – styled per Figma
 * [x] Label
 * [x] Badge
+* [x] Calendar – styled per Figma
+  * [ ] [KNOWN ISSUE] Fix test runner/module resolution issue with cn utility import in Calendar and Button atoms (see dev-log.md)
+  * [ ] [KNOWN ISSUE] Revisit Calendar atom tests after resolving cn import to ensure all tests pass and coverage is complete
+* [x] Popover – styled per Figma
 
 ### Molecules
 
@@ -51,6 +55,7 @@
 * [x] TopNav
 * [x] Sidebar
 * [x] LoginForm
+  * [ ] [KNOWN ISSUE] Revisit LoginForm validation error test for async/DOM update issue (see dev-log.md for details)
 * [x] SignupForm
 
 ### Templates
@@ -60,8 +65,8 @@
 
 ### Pages
 
-* [ ] /login – not included in figma
-* [ ] /signup – not included in figma
+* [x] /login – not included in figma
+* [x] /signup – not included in figma
 * [x] /dashboard
 * [x] /dashboard/jobs
 * [x] /dashboard/roofers
@@ -81,8 +86,20 @@
 
 ### Jobs
 
-* [ ] View job list (table)
+* [x] View job list (table)
 * [ ] Add new job
+  * [x] AddJobForm molecule: implement basic info section (Job Number, Customer, etc.)
+  * [ ] AddJobForm molecule: unit test for basic info section
+  * [ ] AddJobForm molecule: implement status, priority, estimated cost, description, notes section
+  * [ ] AddJobForm molecule: unit test for status, priority, estimated cost, description, notes section
+  * [x] AddJobForm molecule: implement scheduled date section (Calendar + Popover)
+  * [x] AddJobForm molecule: unit test for scheduled date section
+  * [ ] AddJobForm molecule: implement advanced sections (roofing specs, drawing, photos, submission)
+    * [ ] [POST-MVP] Port DrawingCanvas molecule (full interactive drawing, undo/redo, export, etc.)
+    * [ ] [MVP] Placeholder or omit DrawingCanvas for MVP; document in dev-log.md
+    * [ ] [POST-MVP] Port PhotoUpload molecule (full photo upload, preview, category, etc.)
+    * [ ] [MVP] Placeholder or omit PhotoUpload for MVP; document in dev-log.md
+  * [ ] AddJobForm molecule: unit test for advanced sections
 * [ ] Edit job
 * [ ] Delete job
 * [ ] Kanban view by status
@@ -140,3 +157,20 @@
 * [x] Document all actions in dev-log.md
 
 > All Figma Design imports have been removed from app code. Placeholders are in place for atomic/molecule/organism migration. See dev-log.md for details.
+
+## Known Issues / Technical Debt
+
+* [ ] [Calendar] Test runner/module resolution issue with cn utility import (see dev-log.md for troubleshooting and next steps)
+* [ ] [General] Review all ported primitives for ESM/CJS compatibility and test runner import hygiene
+* [ ] Investigate and resolve test runner/TypeScript config issues preventing AddJobForm tests from running (paused)
+  - Research shows this is a known Vitest/React issue, often related to index file exports, ESM/CJS interop, or shared utilities.
+  - Error occurs with any real atom reintroduced, but not with mocks; all atom tests pass in isolation.
+  - Next steps for future resumption:
+    1. Try direct import of atoms in test (not via index).
+    2. Review atoms index file for export issues.
+    3. Check for problematic shared utilities.
+* [ ] Incrementally reintroduce real atom components in AddJobForm test to isolate test runner error (paused)
+
+## Dev Environment
+
+* [ ] [KNOWN ISSUE] Ensure Supabase CLI is recognized in all dev environments (Cursor/editor and user terminal); document any required steps

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
-// TODO: Replace with atomic/organism Jobs implementation. See dev-log.md for rationale.
-// import { Jobs } from '../../../Figma Design/components/Jobs';
+import { JobsTable } from '../molecules/JobsTable';
 
 export const JobsPage: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -10,14 +9,9 @@ export const JobsPage: React.FC = () => {
   // Handlers for navigation and chat
   const handlePageChange = (page: string) => setCurrentPage(page);
 
-  // Placeholder handlers for add/edit job (to be implemented in future tasks)
-  const handleAddJob = () => {
-    // TODO: Implement add job flow
-    alert('Add Job clicked (to be implemented)');
-  };
-  const handleEditJob = (job: any) => {
-    // TODO: Implement edit job flow
-    alert('Edit Job clicked (to be implemented)');
+  // Handler for edit job (stub for now)
+  const handleEditJob = (jobId: string) => {
+    alert(`Edit Job clicked for ${jobId} (to be implemented)`);
   };
 
   return (
@@ -28,8 +22,7 @@ export const JobsPage: React.FC = () => {
       onChatToggle={() => setIsChatOpen((v) => !v)}
       onChatClose={() => setIsChatOpen(false)}
     >
-      {/* <Jobs onAddJob={handleAddJob} onEditJob={handleEditJob} /> */}
-      <div>Jobs component placeholder</div>
+      <JobsTable onEditJob={handleEditJob} />
     </DashboardLayout>
   );
 }; 

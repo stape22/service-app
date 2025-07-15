@@ -152,6 +152,7 @@ This file defines the coding standards, architectural patterns, and workflow pra
 * Aim for high coverage, but prioritize meaningful, maintainable tests over 100% coverage.
 * All tests must pass before merging or deploying.
 * Add integration and E2E tests as the app grows.
+* If a test runner error is encountered with a composite component, isolate the error by mocking all dependencies and incrementally reintroducing real components, documenting each step in dev-log.md and tasks.md.
 
 ---
 

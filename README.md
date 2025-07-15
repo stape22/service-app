@@ -109,6 +109,14 @@ This is a responsive web application for managing service industry workflows (ro
 
 All implementation steps are broken down into small, actionable tasks in `tasks.md`. These are suitable for execution by junior developers and track full coverage of design → code → backend integration.
 
+## 🧪 Testing & Troubleshooting
+
+If you encounter a test runner error with a composite component (e.g., 'Element type is invalid'), follow this process:
+1. Mock all dependencies in the test file (using `vi.mock` for Vitest).
+2. If the error disappears, incrementally reintroduce real components one at a time to isolate the culprit.
+3. Document each step and finding in `dev-log.md` and `tasks.md`.
+4. See `rules.md` for the full policy and troubleshooting protocol.
+
 ---
 
 ## 📌 Notes

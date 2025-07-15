@@ -1,0 +1,37 @@
+<TaskPrompt>
+  <Title>End-of-Day Cleanup and Sync with GitHub</Title>
+
+  <Purpose>
+    Ensure all development progress is safely saved, logged, and pushed to GitHub. No tasks should be left in an inconsistent or incomplete state. Used when stopping work for the day.
+  </Purpose>
+
+  <Context>
+    <Tasks>tasks.md – update task checkboxes and ensure progress is reflected.</Tasks>
+    <DevLog>dev-log.md – log all completed tasks, changes, and decisions.</DevLog>
+    <Code>src/, supabase/, and related folders – check for unsaved or uncommitted code.</Code>
+    <VCS>.git – ensure all local changes are staged, committed, and pushed.</VCS>
+  </Context>
+
+  <Checklist>
+    <Step>Check that all code is saved and passes local lint/test if applicable.</Step>
+    <Step>Review tasks.md – mark completed tasks and update partial task notes if needed.</Step>
+    <Step>Append all relevant entries to dev-log.md, including work in progress, component updates, decisions made, or blocked tasks.</Step>
+    <Step>Ensure no files are left untracked (check `git status`).</Step>
+    <Step>Stage all changes: `git add .`</Step>
+    <Step>Create a clear and meaningful commit message. Example: `git commit -m "EOD – Finished LoginForm and updated tasks.md"`</Step>
+    <Step>Push to GitHub: `git push`</Step>
+    <Step>Merge to main (if working on a branch and work is complete): create pull request and merge in GitHub UI or via CLI.</Step>
+    <Step>Confirm that GitHub reflects the latest commit and all project files are synced.</Step>
+  </Checklist>
+
+  <Warnings>
+    <Rule>Do not leave uncommitted code or files before stopping.</Rule>
+    <Rule>Do not skip dev-log.md entry for work completed today.</Rule>
+    <Rule>Do not leave tasks half-updated without a clear note in tasks.md.</Rule>
+    <Rule>Do not shut down until push is confirmed and remote repo reflects your latest work.</Rule>
+  </Warnings>
+
+  <Goal>
+    Fully close out the work session with all files saved, code pushed, logs updated, and project state ready to resume cleanly the next day.
+  </Goal>
+</TaskPrompt>

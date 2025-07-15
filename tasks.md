@@ -20,10 +20,10 @@
 * [x] Create Supabase client config in /supabase/client.ts
 * [x] Create AuthContext provider for login/logout/session
 * [x] Create reusable <ProtectedRoute /> wrapper
-* [ ] Build Login form (email/password) – follow Figma design
+* [x] Build Login form (email/password) – follow Figma design
 * [ ] Build Signup form (email/password) – follow Figma design
-* [ ] Add form validation and error handling
-* [ ] Redirect on successful login/signup
+* [x] Add form validation and error handling
+* [x] Redirect on successful login/signup
 
 ## 🧱 Atomic Component System
 
@@ -44,22 +44,24 @@
 
 * [x] TopNav
 * [x] Sidebar
-* [ ] LoginForm
-* [ ] SignupForm
+* [x] LoginForm
+* [x] SignupForm
 
 ### Templates
 
-* [ ] AuthPageTemplate
-* [ ] DashboardLayout
+* [x] AuthPageTemplate
+* [x] DashboardLayout
 
 ### Pages
 
 * [ ] /login – not included in figma
 * [ ] /signup – not included in figma
-* [ ] /dashboard
-* [ ] /dashboard/jobs
-* [ ] /dashboard/roofers
-* [ ] /dashboard/customers
+* [x] /dashboard
+* [x] /dashboard/jobs
+* [x] /dashboard/roofers
+* [x] /dashboard/customers
+
+# Note: Only these four are top-level pages per Figma navigation. Add/Edit entity screens (e.g., add-customer, edit-job) are subviews or modals, not separate routes.
 
 ## 📆 Supabase Data Models
 

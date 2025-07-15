@@ -1,0 +1,125 @@
+# 💠 Service Industry App – Built with Cursor + Supabase
+
+This is a responsive web application for managing service industry workflows (roofers, customers, jobs, etc). The frontend is designed using a Figma prototype and built with React, styled with Tailwind CSS and a modern component library (like shadcn/ui). Supabase powers the backend, including authentication, database, storage, and edge functions.
+
+---
+
+## 🚀 Tech Stack
+
+| Layer      | Tech                                         |
+| ---------- | -------------------------------------------- |
+| Frontend   | React (with Vite), TailwindCSS, shadcn/ui    |
+| Backend    | Supabase (Auth, DB, Storage, Edge Functions) |
+| Design     | Atomic Design System                         |
+| Dev Agent  | Claude in Cursor                             |
+| Versioning | Git + GitHub                                 |
+
+---
+
+## 🧱 Project Structure
+
+```
+/components
+  /atoms
+  /molecules
+  /organisms
+  /templates
+  /pages
+/context
+/hooks
+/lib
+/styles
+/utils
+/routes
+/supabase
+```
+
+> Components follow the Atomic Design methodology for maintainable UI architecture.
+
+---
+
+## 🥉 Key Features
+
+* 🔐 Supabase Auth with role-based access (Admin, Roofer, Customer)
+* 🧱 Figma-based component system with clean, reusable UI parts
+* 📆 Supabase tables: Users, Roofers, Customers, Jobs
+* 🗂️ Dashboard views: Kanban, Table, Calendar
+* 📱 Mobile-first responsive design
+
+---
+
+## 🔐 Authentication
+
+* Login and Signup forms will be implemented last per the updated project plan.
+
+---
+
+## 💠 Setup Instructions
+
+1. **Clone the repo:**
+
+   ```bash
+   git clone https://github.com/your-org/your-repo.git
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure Supabase:**
+
+   * Create a `.env.local` file:
+
+     ```
+     VITE_SUPABASE_URL=https://your-project.supabase.co
+     VITE_SUPABASE_ANON_KEY=your-anon-key
+     ```
+
+4. **Run the dev server:**
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 🔄 Scripts
+
+| Command         | Description                |
+| --------------- | -------------------------- |
+| `npm run dev`   | Start the local dev server |
+| `npm run build` | Create production build    |
+| `npm run lint`  | Lint all files with ESLint |
+
+---
+
+## 📋 Task Management
+
+All implementation steps are broken down into small, actionable tasks in `tasks.md`. These are suitable for execution by junior developers and track full coverage of design → code → backend integration.
+
+---
+
+## 📌 Notes
+
+* Designed for use with Claude inside Cursor.
+* Component library should be used for all UI pieces (e.g., forms, buttons, dialogs).
+* Supabase is used for full-stack capabilities (not just auth).
+
+---
+
+## 🛠 GitHub & CI Setup
+
+- This project should be connected to a GitHub repository for version control and collaboration.
+- CI/CD is handled via GitHub Actions (see .github/workflows/).
+- On every push, tests and linting are run automatically.
+- See tasks.md for setup steps.
+
+## ⚡ Supabase MCP Server Integration
+
+- The project uses a Supabase MCP server for backend automation (schema migrations, RLS, etc.).
+- See tasks.md for automation and integration tasks.
+- Ensure your Supabase project is connected and credentials are set in .env.local.
+
+---

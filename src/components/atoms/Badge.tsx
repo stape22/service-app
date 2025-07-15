@@ -1,0 +1,45 @@
+import React from 'react';
+
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  variant?: 'default' | 'primary' | 'secondary' | 'accent' | 'ghost' | 'info' | 'success' | 'warning' | 'error';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+}
+
+const base = 'badge';
+const variantMap = {
+  default: '',
+  primary: 'badge-primary',
+  secondary: 'badge-secondary',
+  accent: 'badge-accent',
+  ghost: 'badge-ghost',
+  info: 'badge-info',
+  success: 'badge-success',
+  warning: 'badge-warning',
+  error: 'badge-error',
+};
+const sizeMap = {
+  sm: 'badge-sm',
+  md: '',
+  lg: 'badge-lg',
+};
+
+export const Badge: React.FC<BadgeProps> = ({
+  variant = 'default',
+  size = 'md',
+  className = '',
+  children,
+  ...props
+}) => (
+  <span
+    className={[
+      base,
+      variantMap[variant],
+      sizeMap[size],
+      className,
+    ].filter(Boolean).join(' ')}
+    {...props}
+  >
+    {children}
+  </span>
+); 

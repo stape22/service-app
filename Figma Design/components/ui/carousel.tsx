@@ -1,10 +1,11 @@
-"use client";
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { ArrowLeft, ArrowRight } from "lucide-react@0.487.0";
+// import { ... } from "embla-carousel-react@8.6.0";
 
 import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react@8.6.0";
-import { ArrowLeft, ArrowRight } from "lucide-react@0.487.0";
 
 import { cn } from "./utils";
 import { Button } from "./button";
@@ -195,7 +196,7 @@ function CarouselPrevious({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      {/* <ArrowLeft /> */}
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -225,7 +226,7 @@ function CarouselNext({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      {/* <ArrowRight /> */}
       <span className="sr-only">Next slide</span>
     </Button>
   );

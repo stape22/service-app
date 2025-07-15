@@ -1,8 +1,6 @@
-"use client";
-
-import * as React from "react";
-import { Command as CommandPrimitive } from "cmdk@1.1.1";
-import { SearchIcon } from "lucide-react@0.487.0";
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { Command as CommandPrimitive } from "cmdk@1.1.1";
+// import { SearchIcon } from "lucide-react@0.487.0";
 
 import { cn } from "./utils";
 import {

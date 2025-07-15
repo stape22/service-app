@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority@0.7.1";
+// [REFERENCE-ONLY] Original import removed to prevent build errors. See README/rules.md.
+// import { cva, type VariantProps } from "class-variance-authority@0.7.1";
 
 import { cn } from "./utils";
 

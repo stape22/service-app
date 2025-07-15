@@ -1,7 +1,8 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Job {
   id: string;
@@ -160,14 +161,14 @@ export function JobsCalendar() {
             onClick={() => navigateMonth('prev')}
             disabled={currentYear === 2025 && currentMonth === 6} // Don't go before July 2025
           >
-            <ChevronLeft className="h-4 w-4" />
+            {/* <ChevronLeft className="h-4 w-4" /> */}
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => navigateMonth('next')}
           >
-            <ChevronRight className="h-4 w-4" />
+            {/* <ChevronRight className="h-4 w-4" /> */}
           </Button>
         </div>
       </div>

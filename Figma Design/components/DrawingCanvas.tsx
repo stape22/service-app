@@ -1,24 +1,11 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { Pen, Type, Square, Circle, Minus, Eraser, Download, Upload, Trash2, Undo, Redo, X, Triangle } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Separator } from './ui/separator';
-import { 
-  Pen, 
-  Type, 
-  Square, 
-  Circle, 
-  Minus, 
-  Eraser, 
-  Download, 
-  Upload, 
-  Trash2,
-  Undo,
-  Redo,
-  X,
-  Triangle
-} from 'lucide-react';
 
 interface DrawingCanvasProps {
   initialDrawing?: string;

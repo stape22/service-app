@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
-import { JobsCalendar } from '../../../Figma Design/components/JobsCalendar';
-import { KanbanBoard } from '../../../Figma Design/components/KanbanBoard';
-import { JobsTable } from '../../../Figma Design/components/JobsTable';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../Figma Design/components/ui/tabs';
-import { Calendar } from '../../../Figma Design/components/ui/calendar';
-import { Table } from '../../../Figma Design/components/ui/table';
+// TODO: Replace with atomic/organism KanbanBoard, JobsCalendar, JobsTable implementations. See dev-log.md for rationale.
+// import { JobsCalendar } from '../../../Figma Design/components/JobsCalendar';
+// import { KanbanBoard } from '../../../Figma Design/components/KanbanBoard';
+// import { JobsTable } from '../../../Figma Design/components/JobsTable';
+// TODO: Replace with atomic/organism Tabs, Calendar, Table implementations. See dev-log.md for rationale.
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../Figma Design/components/ui/tabs';
+// import { Calendar } from '../../../Figma Design/components/ui/calendar';
+// import { Table } from '../../../Figma Design/components/ui/table';
 // TODO: Replace with Kanban icon from design system if/when available
 
 export const DashboardPage: React.FC = () => {
@@ -35,34 +37,37 @@ export const DashboardPage: React.FC = () => {
               <p className="text-gray-600 mt-1">Overview of your roofing jobs and schedule</p>
             </div>
             {/* View Toggle */}
-            <Tabs value={activeView} onValueChange={(value: 'calendar' | 'kanban' | 'table') => setActiveView(value)} className="w-auto">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="calendar" className="p-2" title="Calendar View">
-                  <Calendar className="h-4 w-4" />
-                </TabsTrigger>
-                <TabsTrigger value="kanban" className="p-2" title="Kanban View">
+            <div className="w-auto">
+              <div className="grid w-full grid-cols-3">
+                <button value="calendar" className="p-2" title="Calendar View">
+                  <div>Calendar Placeholder</div>
+                </button>
+                <button value="kanban" className="p-2" title="Kanban View">
                   {/* Placeholder for Kanban icon */}
                   <span className="h-4 w-4 inline-block bg-gray-300 rounded" />
-                </TabsTrigger>
-                <TabsTrigger value="table" className="p-2" title="Table View">
-                  <Table className="h-4 w-4" />
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+                </button>
+                <button value="table" className="p-2" title="Table View">
+                  <div>Table Placeholder</div>
+                </button>
+              </div>
+            </div>
           </div>
           {/* Content Area */}
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <Tabs value={activeView} className="w-full">
-              <TabsContent value="calendar" className="m-0">
-                <JobsCalendar />
-              </TabsContent>
-              <TabsContent value="kanban" className="m-0">
-                <KanbanBoard />
-              </TabsContent>
-              <TabsContent value="table" className="m-0">
-                <JobsTable />
-              </TabsContent>
-            </Tabs>
+            <div className="w-full">
+              <div className="m-0">
+                {/* JobsCalendar component will be replaced with atomic/organism */}
+                <div>Calendar View Placeholder</div>
+              </div>
+              <div className="m-0">
+                {/* KanbanBoard component will be replaced with atomic/organism */}
+                <div>Kanban View Placeholder</div>
+              </div>
+              <div className="m-0">
+                {/* JobsTable component will be replaced with atomic/organism */}
+                <div>Table View Placeholder</div>
+              </div>
+            </div>
           </div>
         </div>
       </main>

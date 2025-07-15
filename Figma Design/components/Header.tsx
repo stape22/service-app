@@ -1,6 +1,7 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { MessageCircle, Settings, Home, Briefcase, Users, HardHat } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import { MessageCircle, Settings, Home, Briefcase, Users, HardHat } from "lucide-react";
 
 type CurrentPage = 'dashboard' | 'jobs' | 'roofers' | 'customers' | 'add-roofer' | 'edit-roofer' | 'add-customer' | 'edit-customer';
 

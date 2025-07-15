@@ -1,0 +1,60 @@
+<TaskPrompt>
+  <Title>Execute Next Valid Task from tasks.md</Title>
+
+  <Purpose>
+    This prompt directs the agent to read the next unchecked task from the root-level tasks.md file and execute it following project-wide conventions, design systems, and documentation protocols.
+  </Purpose>
+
+  <Context>
+    <Readme>Located at /README.md – provides stack, setup, and structure guidelines.</Readme>
+    <Rules>Located at /rules.md – defines coding standards, Supabase usage, folder structure, and audit rules.</Rules>
+    <Tasks>Located at /tasks.md – contains a sequential, actionable task list following Figma and design system.</Tasks>
+    <DevLog>Located at /dev-log.md – must log every action with timestamp, author, file/scope, and reason.</DevLog>
+    <DesignFolder>Figma Design/ – contains reference screens and UI system (except login/signup).</DesignFolder>
+  </Context>
+
+  <Stack>
+    <Frontend>React (with Vite), TailwindCSS, shadcn/ui</Frontend>
+    <Backend>Supabase (Auth, RLS-enabled DB, Storage, Edge Functions)</Backend>
+    <CI>GitHub MCP Server (in .github folder)</CI>
+    <Automation>Supabase MCP Server (configured in /supabase)</Automation>
+    <DesignSystem>Atomic Design System – implement Atoms, Molecules, Organisms, Templates, Pages</DesignSystem>
+  </Stack>
+
+  <Instructions>
+    <Step>Read /tasks.md and identify the first unchecked task in development order.</Step>
+    <Step>Verify prerequisites (parent tasks or dependencies) are completed first.</Step>
+    <Step>If task is UI-related, locate matching design file in Figma Design/ folder (login/signup excluded).</Step>
+    <Step>Use folder conventions and naming from /rules.md (e.g. src/components/atomic layers).</Step>
+    <Step>Implement code with clean separation of concerns and accessibility standards.</Step>
+    <Step>Mark the task as done in /tasks.md.</Step>
+    <Step>
+      Append an entry to /dev-log.md with:
+      <LogFields>
+        <Field>ISO Date/Time</Field>
+        <Field>Author (e.g., Claude, human dev)</Field>
+        <Field>File or component touched</Field>
+        <Field>Summary of the work and reason</Field>
+      </LogFields>
+    </Step>
+  </Instructions>
+
+  <TaskFormat>
+    <Field>Task name from /tasks.md</Field>
+    <Field>Scope and dependencies</Field>
+    <Field>Execution plan</Field>
+    <Field>Code implemented and file locations</Field>
+    <Field>Dev log entry details</Field>
+  </TaskFormat>
+
+  <DoNot>
+    <Rule>Do not skip tasks unless explicitly directed</Rule>
+    <Rule>Do not create unlogged files, schemas, or features</Rule>
+    <Rule>Do not use folders outside the approved structure</Rule>
+    <Rule>Do not deviate from Figma unless justified and logged</Rule>
+  </DoNot>
+
+  <Goal>
+    Maintain disciplined, sequential task execution based on /tasks.md, with traceable output and strict adherence to rules, Figma designs, and documentation.
+  </Goal>
+</TaskPrompt>

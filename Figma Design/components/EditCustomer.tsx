@@ -1,3 +1,5 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -6,7 +8,6 @@ import { Textarea } from "./ui/textarea";
 import { Checkbox } from "./ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Trash2 } from "lucide-react";
 
 interface Contact {
   id: string;
@@ -361,7 +362,7 @@ export function EditCustomer({ customer, onBack }: EditCustomerProps) {
                         onClick={() => removeContact(contact.id)}
                         className="text-red-600 hover:text-red-700 hover:bg-red-50"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        {/* <Trash2 className="w-4 h-4" /> */}
                       </Button>
                     )}
                   </div>

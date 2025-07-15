@@ -1,8 +1,6 @@
-"use client";
-
-import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react@0.487.0";
-import { DayPicker } from "react-day-picker@8.10.1";
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { ChevronLeft, ChevronRight } from "lucide-react@0.487.0";
+// import { DayPicker } from "react-day-picker@8.10.1";
 
 import { cn } from "./utils";
 import { buttonVariants } from "./button";

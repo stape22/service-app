@@ -1,3 +1,5 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { Upload, X, Camera, ImageIcon, Download, Eye, Trash2 } from "lucide-react";
 import { useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
@@ -5,13 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { 
-  Upload, 
-  X, 
-  Camera, 
-  ImageIcon, 
-  Download,
-  Eye,
-  Trash2
+  // Upload, 
+  // X, 
+  // Camera, 
+  // ImageIcon, 
+  // Download,
+  // Eye,
+  // Trash2
 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 

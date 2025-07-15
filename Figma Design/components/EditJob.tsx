@@ -1,3 +1,5 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -8,7 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Checkbox } from "./ui/checkbox";
-import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { DrawingCanvas } from "./DrawingCanvas";
 import { PhotoUpload } from "./PhotoUpload";
@@ -371,7 +372,7 @@ export function EditJob({ job, onBack }: EditJobProps) {
                       variant="outline"
                       className="w-full justify-start text-left font-normal"
                     >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
                       {scheduledDate ? format(scheduledDate, "PPP") : "Pick a date"}
                     </Button>
                   </PopoverTrigger>

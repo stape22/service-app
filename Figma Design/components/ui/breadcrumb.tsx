@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot@1.1.2";
-import { ChevronRight, MoreHorizontal } from "lucide-react@0.487.0";
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { Slot } from "@radix-ui/react-slot@1.1.2";
+// import { ChevronRight, MoreHorizontal } from "lucide-react@0.487.0";
 
 import { cn } from "./utils";
 

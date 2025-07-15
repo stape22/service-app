@@ -1,6 +1,5 @@
-"use client";
-
-import * as CollapsiblePrimitive from "@radix-ui/react-collapsible@1.1.3";
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import * as CollapsiblePrimitive from "@radix-ui/react-collapsible@1.1.3";
 
 function Collapsible({
   ...props

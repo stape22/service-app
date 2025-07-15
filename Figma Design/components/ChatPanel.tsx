@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { X, Send } from "lucide-react";
+// Icon placeholders for now; replace with icon library later
+const XIcon = () => <span aria-label="close" role="img">❌</span>;
+const SendIcon = () => <span aria-label="send" role="img">📤</span>;
 
 interface ChatPanelProps {
   isOpen: boolean;
@@ -39,7 +41,7 @@ export function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
           </div>
         </div>
         <Button variant="ghost" size="icon" onClick={onClose}>
-          <X className="w-4 h-4" />
+          <XIcon />
         </Button>
       </div>
 
@@ -132,7 +134,7 @@ export function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
             size="icon"
             className="bg-blue-600 hover:bg-blue-700"
           >
-            <Send className="w-4 h-4" />
+            <SendIcon />
           </Button>
         </div>
       </div>

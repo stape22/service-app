@@ -1,6 +1,7 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { Calendar, User } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Calendar, User } from "lucide-react";
 
 interface Job {
   id: string;
@@ -208,7 +209,7 @@ function JobCard({ job }: { job: Job }) {
         <div className="flex items-center space-x-2">
           {job.isUnassigned ? (
             <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
-              <User className="w-3 h-3 text-gray-500" />
+              {/* <User className="w-3 h-3 text-gray-500" /> */}
             </div>
           ) : (
             <Avatar className="w-6 h-6">
@@ -220,7 +221,7 @@ function JobCard({ job }: { job: Job }) {
         </div>
         
         <div className="flex items-center space-x-1 text-xs text-gray-500">
-          <Calendar className="w-3 h-3" />
+          {/* <Calendar className="w-3 h-3" /> */}
           <span>{job.date}</span>
         </div>
       </div>

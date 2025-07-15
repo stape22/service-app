@@ -1,8 +1,6 @@
-"use client";
-
-import * as React from "react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox@1.1.4";
-import { CheckIcon } from "lucide-react@0.487.0";
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import * as CheckboxPrimitive from "@radix-ui/react-checkbox@1.1.4";
+// import { CheckIcon } from "lucide-react@0.487.0";
 
 import { cn } from "./utils";
 

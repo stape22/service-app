@@ -1,3 +1,5 @@
+// [REFERENCE-ONLY] This file is for Figma design reference. It may not build or run. See README/rules.md.
+// import { ChevronUp, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import {
   Table,
@@ -8,7 +10,6 @@ import {
   TableRow,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
-import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface JobData {
   id: string;

@@ -21,11 +21,17 @@
 * [x] Create AuthContext provider for login/logout/session
 * [x] Create reusable <ProtectedRoute /> wrapper
 * [x] Build Login form (email/password) – follow Figma design
-* [ ] Build Signup form (email/password) – follow Figma design
+* [x] Build Signup form (email/password) – follow Figma design
 * [x] Add form validation and error handling
 * [x] Redirect on successful login/signup
 
 ## 🧱 Atomic Component System
+
+### Figma Reference Only Policy
+
+* [x] Never import from `Figma Design/components/ui/` in app code
+* [ ] Port new primitives to `src/components/atoms/` as needed, adapting to project conventions and dependencies
+* [x] Remove unused Figma-only dependencies if reintroduced
 
 ### Atoms
 
@@ -65,11 +71,11 @@
 
 ## 📆 Supabase Data Models
 
-* [ ] Create users table with roles: admin, roofer, customer
-* [ ] Create roofers table (name, email, phone)
-* [ ] Create customers table (name, address, email, phone)
-* [ ] Create jobs table (title, status, roofer_id, customer_id, due_date)
-* [ ] Enable RLS and set access policies per role
+* [x] Create users table with roles: admin, roofer, customer
+* [x] Create roofers table (name, email, phone)
+* [x] Create customers table (name, address, email, phone)
+* [x] Create jobs table (title, status, roofer_id, customer_id, due_date)
+* [x] Enable RLS and set access policies per role
 
 ## 📂 Dashboard Features
 
@@ -124,3 +130,13 @@
 * [ ] Add scripts/tasks for database seeding and test data
 * [ ] Set up automated backups and environment sync
 * [ ] Log all MCP automation actions in dev-log.md
+
+## 🛠 Figma Reference Build Errors (Non-Production)
+
+* [x] Identify all Figma Design/components/ui files causing Vite import errors
+* [x] Remove or comment out all invalid imports (e.g., @radix-ui/react-avatar@1.1.3) in Figma reference files
+* [x] Add a README note: Figma Design directory is for reference only and not part of the build
+* [x] Ensure Vite build passes with Figma Design directory present
+* [x] Document all actions in dev-log.md
+
+> All Figma Design imports have been removed from app code. Placeholders are in place for atomic/molecule/organism migration. See dev-log.md for details.

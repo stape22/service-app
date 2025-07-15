@@ -38,6 +38,16 @@ This is a responsive web application for managing service industry workflows (ro
 
 ---
 
+## 📐 Figma Design Reference Directory
+
+- The `Figma Design/` directory contains reference code exported from Figma and is NOT part of the production build.
+- Do NOT import from `Figma Design/components/ui/` in app code. Use it only for design reference and porting new primitives.
+- This directory may contain code that does not build or run (e.g., invalid imports, missing dependencies).
+- All production code must live in `src/` and follow the atomic/component system.
+- **All Figma Design imports have been removed from app code. Placeholders are in place for atomic/component migration. See dev-log.md for audit details.**
+
+---
+
 ## 🥉 Key Features
 
 * 🔐 Supabase Auth with role-based access (Admin, Roofer, Customer)

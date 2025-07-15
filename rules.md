@@ -56,6 +56,16 @@ This file defines the coding standards, architectural patterns, and workflow pra
 
 ---
 
+## 📐 Figma Design Reference Policy
+
+- The `Figma Design/` directory is for design/code reference only and is NOT part of the production build.
+- Never import from `Figma Design/components/ui/` in app code.
+- If a new primitive is needed, port it to `src/components/atoms/` and adapt/test it.
+- The Figma Design directory may contain code that does not build or run.
+- **All Figma Design imports have been removed from app code. Placeholders are in place for atomic/component migration. See dev-log.md for audit details.**
+
+---
+
 ## 🧩 STATE MANAGEMENT & CONTEXT
 
 * Use React Context only for global/shared state (e.g., auth)

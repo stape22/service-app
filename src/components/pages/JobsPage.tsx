@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
-import { Jobs } from '../../../Figma Design/components/Jobs';
+// TODO: Replace with atomic/organism Jobs implementation. See dev-log.md for rationale.
+// import { Jobs } from '../../../Figma Design/components/Jobs';
 
 export const JobsPage: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -27,7 +28,8 @@ export const JobsPage: React.FC = () => {
       onChatToggle={() => setIsChatOpen((v) => !v)}
       onChatClose={() => setIsChatOpen(false)}
     >
-      <Jobs onAddJob={handleAddJob} onEditJob={handleEditJob} />
+      {/* <Jobs onAddJob={handleAddJob} onEditJob={handleEditJob} /> */}
+      <div>Jobs component placeholder</div>
     </DashboardLayout>
   );
 }; 

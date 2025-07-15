@@ -122,4 +122,36 @@ All implementation steps are broken down into small, actionable tasks in `tasks.
 - See tasks.md for automation and integration tasks.
 - Ensure your Supabase project is connected and credentials are set in .env.local.
 
+## ⚡ Supabase MCP Server Automation
+
+This project uses the Supabase MCP server for backend automation, including:
+- Schema migrations (tables, columns, indexes)
+- RLS (Row-Level Security) policy automation
+- Database seeding and test data
+- Automated backups and environment sync
+
+**How to use:**
+- All automation tasks are tracked in tasks.md and logged in dev-log.md
+- Use the MCP server CLI or dashboard to apply migrations and policies
+- Ensure your .env.local is configured with the correct Supabase project credentials
+- See the Supabase docs and MCP server documentation for advanced usage
+
+### MCP Server CLI Setup & Verification
+
+1. **Install the Supabase CLI:**
+   - **Windows:** Use [Scoop](https://scoop.sh/) (recommended):
+     ```sh
+     scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+     scoop install supabase
+     ```
+   - **Mac/Linux:** Use Homebrew or download the binary from [Supabase CLI Releases](https://github.com/supabase/cli/releases).
+   - **Note:** `npm install -g supabase` is deprecated and will not work.
+2. **Configure environment:**
+   - Ensure `.env.local` contains your Supabase project URL and anon key.
+3. **Verify connection:**
+   - Run a test command (e.g., `supabase --version`) to verify access.
+4. **Troubleshooting:**
+   - If the CLI is not recognized in your editor/IDE terminal, restart the editor or your computer to refresh the PATH.
+   - If issues persist, use your system terminal for CLI commands and the editor for code.
+
 ---

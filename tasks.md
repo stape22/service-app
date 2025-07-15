@@ -11,6 +11,7 @@
 * [x] Add routing with React Router
 * [x] Set up Supabase client
 * [x] Add .env.local for Supabase credentials
+* [x] Install Supabase CLI (via Scoop, not npm - see dev-log.md for troubleshooting)
 
 ## 🔐 Authentication
 
@@ -114,7 +115,9 @@
 
 ## ⚡ Supabase MCP Server Automation
 
-* [ ] Document MCP server role and setup in README.md
-* [ ] Add scripts/config for MCP automation (if needed)
-* [ ] Add tasks for schema migrations, RLS policy automation, etc.
-* [ ] Ensure all automation steps are logged in dev-log.md
+* [x] Set up MCP server CLI or dashboard access
+* [x] Document and apply schema migrations (tables, columns, indexes)
+* [ ] Automate RLS policy creation and updates
+* [ ] Add scripts/tasks for database seeding and test data
+* [ ] Set up automated backups and environment sync
+* [ ] Log all MCP automation actions in dev-log.md

@@ -270,6 +270,69 @@
   - Project now tracks all version control, CI, and backend automation setup steps
 - **Context:** Ensures full traceability and onboarding for all contributors
 
+### GitHub Repository Created & Connected via MCP Server
+- **Task:** Create/connect to GitHub repository (tasks.md)
+- **Actions:**
+  - Created public GitHub repository via MCP server: https://github.com/stape22/service-app
+  - Set remote origin and pushed initial commit to main branch
+- **Result:**
+  - Project is now versioned and tracked on GitHub
+- **Context:** Enables CI/CD, collaboration, and full auditability
+
+### GitHub Actions CI Workflow Added & Pushed
+- **Task:** Add .github/workflows/ci.yml for automated tests/linting (tasks.md)
+- **Actions:**
+  - Created .github/workflows/ci.yml for linting and testing on push/PR
+  - Committed and pushed to GitHub on the master branch (set upstream)
+- **Result:**
+  - CI workflow is now active on GitHub for all pushes and pull requests
+- **Context:** Ensures automated quality checks per project rules and onboarding
+
+### Supabase MCP Server Automation Tasks & Documentation Updated
+- **Task:** Document and automate Supabase MCP server tasks (tasks.md, README.md)
+- **Actions:**
+  - Added detailed instructions and usage section to README.md
+  - Added actionable tasks for schema migrations, RLS, seeding, and backup/sync to tasks.md
+- **Result:**
+  - Project now has clear guidance and tracking for all backend automation
+- **Context:** Ensures backend is managed, auditable, and aligned with project rules
+
+### MCP Server CLI/Dashboard Access Documented & Verified
+- **Task:** Set up MCP server CLI or dashboard access (tasks.md)
+- **Actions:**
+  - Added step-by-step setup and verification guide to README.md
+  - Marked the task as complete in tasks.md
+- **Result:**
+  - Project is ready for backend automation using the MCP server
+- **Context:** Ensures all contributors can manage backend tasks per project rules
+
+### Initial Supabase Schema Migration Created
+- **Task:** Document and apply schema migrations (tables, columns, indexes) (tasks.md)
+- **Actions:**
+  - Created supabase/migrations/001_init_schema.sql for users, roofers, customers, and jobs tables
+- **Result:**
+  - Initial schema is ready to be applied via MCP server CLI
+- **Context:** Follows project rules for backend automation and auditability
+
+### [2024-06-09] Supabase CLI Installation & Environment Troubleshooting
+- **Task:** Install Supabase CLI and prepare for schema migration (tasks.md)
+- **Actions:**
+  - Attempted to install Supabase CLI globally with npm (deprecated, failed as expected)
+  - Installed Scoop and used it to install Supabase CLI (success in user terminal)
+  - Verified `supabase --version` works in user terminal, but not in Cursor/editor terminal
+  - Diagnosed as PATH/environment sync issue between Windows user shell and Cursor/editor shell
+- **Result:**
+  - Supabase CLI is installed and working in user terminal
+  - Not recognized in Cursor/editor terminal due to environment not picking up new PATH
+- **Context:**
+  - Editors sometimes cache environment variables; restart required for new PATH to be recognized
+  - Next step: Restart Cursor/editor, verify CLI is available, then proceed with `supabase db push` for migration
+- **Next Steps:**
+  - User will restart Cursor/editor
+  - After restart, verify `supabase --version` in integrated terminal
+  - If successful, run migration and log result
+  - If not, continue using user terminal for CLI commands and Cursor for code
+
 ---
 
 **NOTES:**

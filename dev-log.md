@@ -653,6 +653,16 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
 
 ## [2024-07-15T...] [AI: Cursor Agent]
 
+### AddJobForm Status, Priority, Estimated Cost, Description, Notes Section Unit Test & Task Completion
+- **Files:** src/components/molecules/AddJobForm.test.tsx, tasks.md
+- **Summary:**
+  - Implemented a unit test for the AddJobForm status, priority, estimated cost, description, and notes section: verifies the popover opens, the form fields are populated with default values, and the form can be submitted.
+  - Marked the corresponding subtask as complete in tasks.md.
+- **Context:**
+  - Ensures atomic design, accessibility, and test coverage for the status, priority, estimated cost, description, and notes fields per project rules and TaskExecutorPrompt.xml.
+
+## [2024-07-15T...] [AI: Cursor Agent]
+
 ### DrawingCanvas Deferred for MVP & Task Tracking
 - **Files:** tasks.md, dev-log.md
 - **Summary:**
@@ -689,3 +699,7 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
     2. Review the atoms index file for export issues, typos, or extension mismatches.
     3. Check for problematic shared utilities by mocking or removing them in one atom.
   - Investigation is paused for now; all findings and next steps are documented for future reference.
+
+2024-07-15T15:10:00Z | Claude | src/components/molecules/AddJobForm.tsx, tasks.md | Marked AddJobForm advanced sections (roofing specs, drawing, photos, submission) as implemented for MVP with placeholders, per Figma and tasks.md. Task marked as done.
+
+2024-07-15T15:20:00Z | Claude | src/components/molecules/AddJobForm.test.tsx, tasks.md | Implemented unit tests for AddJobForm advanced sections (roofing specs, drawing, photos), including MVP placeholders. Marked task as done.

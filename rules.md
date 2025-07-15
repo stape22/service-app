@@ -148,3 +148,5 @@ This file defines the coding standards, architectural patterns, and workflow pra
 All agents and humans must follow these rules unless a documented override is committed in the `dev-log.md`.
 
 > These rules are living and will evolve as the system grows.
+
+* Use `.env.secret` for highly sensitive secrets (e.g., DB passwords); this file must be ignored by git and its creation/changes logged in dev-log.md

@@ -12,6 +12,7 @@
 * [x] Set up Supabase client
 * [x] Add .env.local for Supabase credentials
 * [x] Install Supabase CLI (via Scoop, not npm - see dev-log.md for troubleshooting)
+* [x] Create .env.secret for Supabase DB password
 
 ## 🔐 Authentication
 
@@ -107,10 +108,10 @@
 
 ## 🛠 GitHub & CI Setup
 
-* [ ] Initialize local git repository
-* [ ] Create/connect to GitHub repository
-* [ ] Add remote origin and push code
-* [ ] Add .github/workflows/ci.yml for automated tests/linting
+* [x] Initialize local git repository
+* [x] Create/connect to GitHub repository
+* [x] Add remote origin and push code
+* [x] Add .github/workflows/ci.yml for automated tests/linting
 * [ ] Document GitHub/CI setup in README.md
 
 ## ⚡ Supabase MCP Server Automation

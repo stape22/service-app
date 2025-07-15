@@ -1,5 +1,14 @@
 ## [2024-06-09] [AI: Cursor Agent]
 
+### Documentation & Checklist Updates
+- **Files:** tasks.md, README.md, rules.md
+- **Summary:**
+  - Added and checked off task for `.env.secret` creation in tasks.md
+  - Marked GitHub/CI setup and schema migration tasks as complete in tasks.md
+  - Added a section to README.md about `.env.secret` for secrets management
+  - Updated rules.md to recommend `.env.secret` for highly sensitive secrets, to be ignored by git and logged in dev-log.md
+- **Context:** Ensures all documentation and checklists are up to date and compliant with project rules for auditability and secrets management.
+
 ### Project Initialization
 - **Task:** Initialize React + Vite project ([tasks.md] Project Setup)
 - **Command:** `npm create vite@latest . -- --template react-ts`
@@ -260,6 +269,17 @@
 - **Result:**
   - Project is fully configured for Supabase environment variables
 - **Context:** .env.local is not committed to version control per security best practices
+
+### .env.secret Setup
+- **Task:** Create .env.secret for Supabase DB password (tasks.md)
+- **Actions:**
+  - Generated a strong password for the Supabase database.
+  - Created `.env.secret` in the project root to store the password securely (not tracked by git).
+  - Updated `.gitignore` to include `.env.secret`.
+  - Refer to `.env.secret` for the DB password when needed (e.g., CLI, config).
+- **Result:**
+  - .env.secret is now created and configured
+- **Context:** .env.secret is not committed to version control per security best practices
 
 ### GitHub/CI & Supabase MCP Server Integration Tasks Added
 - **Task:** Add GitHub/CI and MCP server integration to project docs and tasks.md

@@ -155,3 +155,13 @@ This project uses the Supabase MCP server for backend automation, including:
    - If issues persist, use your system terminal for CLI commands and the editor for code.
 
 ---
+
+## 🔑 Secrets Management
+
+- Create a `.env.secret` file in your project root for highly sensitive secrets (e.g., Supabase DB password).
+- Example:
+  ```
+  SUPABASE_DB_PASSWORD=your-db-password
+  ```
+- This file is ignored by git (see .gitignore) and should never be committed.
+- Reference `.env.secret` for CLI/database operations as needed.

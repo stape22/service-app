@@ -89,16 +89,16 @@
 * [x] View job list (table)
 * [ ] Add new job
   * [x] AddJobForm molecule: implement basic info section (Job Number, Customer, etc.)
-  * [ ] AddJobForm molecule: unit test for basic info section
+  * [x] AddJobForm molecule: unit test for basic info section
   * [x] AddJobForm molecule: implement status, priority, estimated cost, description, notes section
   * [x] AddJobForm molecule: unit test for status, priority, estimated cost, description, notes section
   * [x] AddJobForm molecule: implement scheduled date section (Calendar + Popover)
   * [x] AddJobForm molecule: unit test for scheduled date section
   * [x] AddJobForm molecule: implement advanced sections (roofing specs, drawing, photos, submission)
     * [ ] [POST-MVP] Port DrawingCanvas molecule (full interactive drawing, undo/redo, export, etc.)
-    * [ ] [MVP] Placeholder or omit DrawingCanvas for MVP; document in dev-log.md
+    * [x] [MVP] Placeholder for DrawingCanvas (disabled canvas or "Coming soon" message); see dev-log.md
     * [ ] [POST-MVP] Port PhotoUpload molecule (full photo upload, preview, category, etc.)
-    * [ ] [MVP] Placeholder or omit PhotoUpload for MVP; document in dev-log.md
+    * [x] [MVP] Placeholder for PhotoUpload (disabled upload or "Coming soon" message); see dev-log.md
   * [x] AddJobForm molecule: unit test for advanced sections
 * [ ] Edit job
 * [ ] Delete job

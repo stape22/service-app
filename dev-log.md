@@ -716,3 +716,14 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
   - Documented the issue and planned fix in both dev-log.md and tasks.md per project rules.
 - **Context:**
   - This log ensures full auditability of dependency management and troubleshooting, as required by rules.md and README.md.
+
+## [2024-07-16T02:45:00Z] [AI Agent]
+
+### AddJobForm Molecule: Unit Test for Basic Info Section
+- **Files:** src/components/molecules/AddJobForm.test.tsx, tasks.md
+- **Summary:**
+  - Implemented unit test for AddJobForm basic info section (Job Number, Customer, Customer Address, Assigned Roofer, Job Type).
+  - Marked the subtask as complete in tasks.md.
+  - Test runner issues remain; see previous logs for troubleshooting and next steps.
+- **Context:**
+  - Fulfills atomic design, sequential workflow, and audit/documentation requirements per TaskExecutorPrompt.xml and rules.md.

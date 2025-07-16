@@ -170,6 +170,7 @@
     2. Review atoms index file for export issues.
     3. Check for problematic shared utilities.
 * [ ] Incrementally reintroduce real atom components in AddJobForm test to isolate test runner error (paused)
+* [ ] [Dependency] React 19 vs react-day-picker@8.10.1 conflict: Downgrade react and react-dom to ^18.3.1, react-router-dom to ^6.28.0. Verify all tests and builds after change. (See dev-log.md for details)
 
 ## Dev Environment
 

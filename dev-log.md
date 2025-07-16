@@ -703,3 +703,16 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
 2024-07-15T15:10:00Z | Claude | src/components/molecules/AddJobForm.tsx, tasks.md | Marked AddJobForm advanced sections (roofing specs, drawing, photos, submission) as implemented for MVP with placeholders, per Figma and tasks.md. Task marked as done.
 
 2024-07-15T15:20:00Z | Claude | src/components/molecules/AddJobForm.test.tsx, tasks.md | Implemented unit tests for AddJobForm advanced sections (roofing specs, drawing, photos), including MVP placeholders. Marked task as done.
+
+## [2024-07-16T02:30:00Z] [AI: Cursor Agent]
+
+### Dependency Conflict: React 19 vs react-day-picker
+- **Summary:**
+  - Attempted to run `npm install` and encountered a dependency conflict: `react-day-picker@8.10.1` requires React 16/17/18, but the project was using React 19.
+  - Planned to resolve by downgrading `react` and `react-dom` to `^18.3.1` and `react-router-dom` to a compatible version (`^6.28.0`).
+  - This change is required for test runner and build compatibility with all current dependencies.
+- **Troubleshooting Steps:**
+  - Read package.json and identified the version conflict.
+  - Documented the issue and planned fix in both dev-log.md and tasks.md per project rules.
+- **Context:**
+  - This log ensures full auditability of dependency management and troubleshooting, as required by rules.md and README.md.

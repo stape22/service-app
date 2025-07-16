@@ -13,10 +13,12 @@ export const LoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormError(null);
+    
     if (!email || !password) {
       setFormError('Email and password are required.');
       return;
     }
+    
     await login(email, password);
   };
 
@@ -28,30 +30,40 @@ export const LoginForm: React.FC = () => {
       errorText={errorText}
       loading={loading}
       submitLabel="Sign In"
+      showSignupLink={true}
       {...(errorText ? { errorTestId: 'login-error' } : {})}
     >
-      <div>
-        <Label htmlFor="email">Email</Label>
+      <div className="space-y-2">
+        <Label htmlFor="email" className="text-slate-700">
+          Email address
+        </Label>
         <Input
           id="email"
           name="email"
           type="email"
           autoComplete="email"
+          placeholder="Enter your email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
+          className="w-full"
         />
       </div>
-      <div>
-        <Label htmlFor="password">Password</Label>
+      
+      <div className="space-y-2">
+        <Label htmlFor="password" className="text-slate-700">
+          Password
+        </Label>
         <Input
           id="password"
           name="password"
           type="password"
           autoComplete="current-password"
+          placeholder="Enter your password"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required
+          className="w-full"
         />
       </div>
     </AuthForm>

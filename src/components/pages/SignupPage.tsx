@@ -13,7 +13,10 @@ export const SignupPage: React.FC = () => {
   }, [user, navigate]);
 
   return (
-    <AuthPageTemplate title="Create your account">
+    <AuthPageTemplate 
+      title="Create your account" 
+      subtitle="Get started with your free account"
+    >
       <SignupForm />
     </AuthPageTemplate>
   );

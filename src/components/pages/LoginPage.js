@@ -11,5 +11,5 @@ export const LoginPage = () => {
         if (user)
             navigate('/dashboard');
     }, [user, navigate]);
-    return (_jsx(AuthPageTemplate, { title: "Sign in to your account", children: _jsx(LoginForm, {}) }));
+    return (_jsx(AuthPageTemplate, { title: "Welcome back", subtitle: "Sign in to your account to continue", children: _jsx(LoginForm, {}) }));
 };

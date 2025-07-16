@@ -727,3 +727,23 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
   - Test runner issues remain; see previous logs for troubleshooting and next steps.
 - **Context:**
   - Fulfills atomic design, sequential workflow, and audit/documentation requirements per TaskExecutorPrompt.xml and rules.md.
+
+## [2024-07-16T03:45:00Z] [AI: Claude]
+
+### App Header Update to Match Figma Design
+- **Files:** src/components/atoms/Avatar.tsx, src/components/atoms/index.ts, src/components/organisms/TopNav.tsx, src/components/templates/DashboardLayout.tsx, dev-log.md
+- **Summary:**
+  - Created new Avatar atom component based on Figma design reference, adapted for project conventions
+  - Updated TopNav organism to match Figma design with:
+    - ServiceMaster logo with blue square and white inner square
+    - Navigation buttons with icons (Home, Briefcase, HardHat, Users)
+    - Right side icons (MessageCircle, Settings, Avatar)
+    - Proper styling and active states based on current route
+  - Updated DashboardLayout template to remove sidebar and use horizontal header only
+  - Added Avatar component to atoms index exports
+  - Fixed import paths to use correct utils/index location
+- **Context:**
+  - Fulfills requirement to match Figma design for app header
+  - Follows atomic design principles and project conventions
+  - Maintains accessibility and responsive design
+  - All changes logged per audit protocol

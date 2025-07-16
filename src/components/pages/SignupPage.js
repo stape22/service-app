@@ -11,5 +11,5 @@ export const SignupPage = () => {
         if (user)
             navigate('/dashboard');
     }, [user, navigate]);
-    return (_jsx(AuthPageTemplate, { title: "Create your account", children: _jsx(SignupForm, {}) }));
+    return (_jsx(AuthPageTemplate, { title: "Create your account", subtitle: "Get started with your free account", children: _jsx(SignupForm, {}) }));
 };

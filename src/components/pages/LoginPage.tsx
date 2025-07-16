@@ -13,7 +13,10 @@ export const LoginPage: React.FC = () => {
   }, [user, navigate]);
 
   return (
-    <AuthPageTemplate title="Sign in to your account">
+    <AuthPageTemplate 
+      title="Welcome back" 
+      subtitle="Sign in to your account to continue"
+    >
       <LoginForm />
     </AuthPageTemplate>
   );

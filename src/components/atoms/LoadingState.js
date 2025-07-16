@@ -1,5 +1,4 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React from 'react';
 import { LoadingSpinner } from './LoadingSpinner';
 export const LoadingState = ({ isLoading, children, message = 'Loading...', skeleton, className = '' }) => {
     if (!isLoading) {

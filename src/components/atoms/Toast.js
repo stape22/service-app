@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useEffect } from 'react';
-import { Badge } from './Badge';
+import { useEffect } from 'react';
 export const Toast = ({ type, message, onClose, duration = 5000, className = '' }) => {
     useEffect(() => {
         const timer = setTimeout(() => {

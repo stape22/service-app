@@ -183,3 +183,12 @@ This project uses the Supabase MCP server for backend automation, including:
   ```
 - This file is ignored by git (see .gitignore) and should never be committed.
 - Reference `.env.secret` for CLI/database operations as needed.
+
+## 🗂️ Page Structure Clarification: Dashboard vs. Jobs
+
+- **Dashboard**: View-only. Displays jobs in three different views (e.g., calendar, table, kanban). No editing or adding jobs here—just visualization.
+- **Jobs**: For adding and managing jobs (add, edit, delete). Does not display jobs in calendar/table/kanban views.
+
+**User Flow:**
+- To view jobs in different formats, go to the Dashboard.
+- To add or manage jobs, go to the Jobs page.

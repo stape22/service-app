@@ -1,4 +1,3 @@
-import React from 'react';
 export declare const Table: React.FC<React.TableHTMLAttributes<HTMLTableElement>>;
 export declare const TableHeader: React.FC<React.HTMLAttributes<HTMLTableSectionElement>>;
 export declare const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>>;

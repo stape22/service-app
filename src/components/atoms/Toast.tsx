@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { Badge } from './Badge';
+import { useEffect } from 'react';
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
 

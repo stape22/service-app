@@ -9,8 +9,8 @@ const availableCustomers = [
     { name: 'Tech Solutions Inc.', assignedRoofer: null, address: '321 Corporate Blvd, Rockford, IL 61101' },
     { name: 'Robert Johnson', assignedRoofer: 'Jennifer Martinez', address: '654 Pine Street, Decatur, IL 62521' }
 ];
-export const AddJobForm = ({ onBack }) => {
-    const [formData, setFormData] = useState({
+export const AddJobForm = ({ onBack, initialJob, onSubmit }) => {
+    const [formData, setFormData] = useState(initialJob?.formData || {
         jobNumber: '',
         customer: '',
         jobType: 'repair',
@@ -20,9 +20,9 @@ export const AddJobForm = ({ onBack }) => {
         description: '',
         notes: '',
     });
-    const [scheduledDate, setScheduledDate] = useState(null);
+    const [scheduledDate, setScheduledDate] = useState(initialJob?.scheduledDate ?? null);
     const [calendarOpen, setCalendarOpen] = useState(false);
-    const [roofingSpecs, setRoofingSpecs] = useState({
+    const [roofingSpecs, setRoofingSpecs] = useState(initialJob?.roofingSpecs || {
         gutterTotalFootage: '',
         gutterType: '',
         gutterColor: '',
@@ -41,13 +41,13 @@ export const AddJobForm = ({ onBack }) => {
         const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
         return `JOB-${currentYear}-${randomNum}`;
     };
-    // Auto-generate job number if empty
+    // Auto-generate job number if empty and not in edit mode
     useEffect(() => {
-        if (!formData.jobNumber) {
+        if (!formData.jobNumber && !initialJob) {
             setFormData(prev => ({ ...prev, jobNumber: generateJobNumber() }));
         }
         // eslint-disable-next-line
-    }, []);
+    }, [initialJob]);
     const handleInputChange = (field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
@@ -64,21 +64,25 @@ export const AddJobForm = ({ onBack }) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        // For MVP, just log the data
         const jobData = {
-            ...formData,
-            scheduledDate: scheduledDate ? scheduledDate.toISOString().split('T')[0] : '',
+            formData,
+            scheduledDate,
             roofingSpecs,
         };
-        // eslint-disable-next-line no-console
-        console.log('Job data:', jobData);
-        if (onBack)
+        if (onSubmit) {
+            onSubmit(jobData);
+        }
+        else if (onBack) {
+            // For MVP, just log the data
+            // eslint-disable-next-line no-console
+            console.log('Job data:', jobData);
             onBack();
+        }
     };
     const selectedCustomer = availableCustomers.find(c => c.name === formData.customer);
     const assignedRoofer = selectedCustomer?.assignedRoofer;
     const customerAddress = selectedCustomer?.address;
-    return (_jsxs("form", { className: "bg-white rounded-lg border border-gray-200 p-6 max-w-2xl mx-auto", onSubmit: handleSubmit, children: [_jsxs("div", { className: "flex items-center justify-between mb-8", children: [_jsxs("div", { children: [_jsx("h1", { className: "text-2xl font-semibold text-gray-900", children: "Add Job" }), _jsx("p", { className: "text-gray-600 mt-1", children: "Create a new roofing job in the system" })] }), _jsx(Button, { variant: "outline", type: "button", onClick: onBack, children: "Back to Jobs List" })] }), _jsxs("div", { className: "mb-6 grid grid-cols-1 md:grid-cols-2 gap-6", children: [_jsxs("div", { children: [_jsxs(Label, { htmlFor: "jobNumber", className: "text-gray-700", children: ["Job Number ", _jsx("span", { className: "text-red-500", children: "*" })] }), _jsx(Input, { id: "jobNumber", placeholder: "Auto-generated", value: formData.jobNumber, onChange: e => handleInputChange('jobNumber', e.target.value), className: "mt-2" })] }), _jsxs("div", { children: [_jsxs(Label, { className: "text-gray-700 mb-2 block", children: ["Customer ", _jsx("span", { className: "text-red-500", children: "*" })] }), _jsx(Select, { value: formData.customer, onChange: e => handleInputChange('customer', e.target.value), options: availableCustomers.map(customer => ({ label: customer.name, value: customer.name })) })] })] }), formData.customer && customerAddress && (_jsxs("div", { className: "mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200", children: [_jsx(Label, { className: "text-gray-700 mb-2 block", children: "Job Location" }), _jsx("p", { className: "text-sm text-gray-800", children: customerAddress }), _jsx("p", { className: "text-xs text-gray-500 mt-1", children: "Job will be performed at customer's address" })] })), formData.customer && (_jsxs("div", { className: "mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200", children: [_jsx(Label, { className: "text-gray-700 mb-2 block", children: "Assigned Roofer" }), _jsx("p", { className: "text-sm text-gray-600", children: assignedRoofer ? (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-medium text-blue-800", children: assignedRoofer }), " is assigned to this customer"] })) : (_jsx("span", { className: "text-amber-600", children: "No roofer is currently assigned to this customer. Please assign a roofer to the customer first." })) })] })), _jsx("div", { className: "mb-6", children: _jsx(RadioGroup, { label: "Job Type", value: formData.jobType, onChange: value => handleInputChange('jobType', value), options: [
+    return (_jsxs("form", { className: "bg-white rounded-lg border border-gray-200 p-6 max-w-2xl mx-auto", onSubmit: handleSubmit, children: [_jsxs("div", { className: "flex items-center justify-between mb-8", children: [_jsxs("div", { children: [_jsx("h1", { className: "text-2xl font-semibold text-gray-900", children: initialJob ? 'Edit Job' : 'Add Job' }), _jsx("p", { className: "text-gray-600 mt-1", children: initialJob ? 'Edit job details and save changes' : 'Create a new roofing job in the system' })] }), _jsx(Button, { variant: "outline", type: "button", onClick: onBack, children: "Back to Jobs List" })] }), _jsxs("div", { className: "mb-6 grid grid-cols-1 md:grid-cols-2 gap-6", children: [_jsxs("div", { children: [_jsxs(Label, { htmlFor: "jobNumber", className: "text-gray-700", children: ["Job Number ", _jsx("span", { className: "text-red-500", children: "*" })] }), _jsx(Input, { id: "jobNumber", placeholder: "Auto-generated", value: formData.jobNumber, onChange: e => handleInputChange('jobNumber', e.target.value), className: "mt-2" })] }), _jsxs("div", { children: [_jsxs(Label, { className: "text-gray-700 mb-2 block", children: ["Customer ", _jsx("span", { className: "text-red-500", children: "*" })] }), _jsx(Select, { value: formData.customer, onChange: e => handleInputChange('customer', e.target.value), options: availableCustomers.map(customer => ({ label: customer.name, value: customer.name })) })] })] }), formData.customer && customerAddress && (_jsxs("div", { className: "mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200", children: [_jsx(Label, { className: "text-gray-700 mb-2 block", children: "Job Location" }), _jsx("p", { className: "text-sm text-gray-800", children: customerAddress }), _jsx("p", { className: "text-xs text-gray-500 mt-1", children: "Job will be performed at customer's address" })] })), formData.customer && (_jsxs("div", { className: "mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200", children: [_jsx(Label, { className: "text-gray-700 mb-2 block", children: "Assigned Roofer" }), _jsx("p", { className: "text-sm text-gray-600", children: assignedRoofer ? (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-medium text-blue-800", children: assignedRoofer }), " is assigned to this customer"] })) : (_jsx("span", { className: "text-amber-600", children: "No roofer is currently assigned to this customer. Please assign a roofer to the customer first." })) })] })), _jsx("div", { className: "mb-6", children: _jsx(RadioGroup, { label: "Job Type", value: formData.jobType, onChange: value => handleInputChange('jobType', value), options: [
                         { label: "Estimate", value: "estimate" },
                         { label: "Install", value: "install" },
                         { label: "Repair", value: "repair" },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastType } from '../components/atoms/Toast';
+import type { ToastType } from '../components/atoms/Toast';
 interface ToastContextType {
     showToast: (type: ToastType, message: string, duration?: number) => void;
     hideToast: (id: string) => void;

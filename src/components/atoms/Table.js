@@ -1,5 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React from 'react';
 export const Table = ({ className = '', ...props }) => (_jsx("table", { className: `min-w-full divide-y divide-gray-200 ${className}`, ...props }));
 export const TableHeader = ({ className = '', ...props }) => (_jsx("thead", { className: `bg-gray-50 ${className}`, ...props }));
 export const TableBody = ({ className = '', ...props }) => (_jsx("tbody", { className: className, ...props }));

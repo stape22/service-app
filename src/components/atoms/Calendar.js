@@ -1,5 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import * as React from "react";
 import { DayPicker } from "react-day-picker";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "../../utils/index";

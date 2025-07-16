@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { Toast, ToastType } from '../components/atoms/Toast';
+import { Toast } from '../components/atoms/Toast';
 const ToastContext = createContext(undefined);
 export const useToast = () => {
     const context = useContext(ToastContext);

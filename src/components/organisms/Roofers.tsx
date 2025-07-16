@@ -96,17 +96,8 @@ const roofersData: RooferData[] = [
 ];
 
 export const Roofers: React.FC<RoofersProps> = ({ onAddRoofer, onEditRoofer }) => {
-  const [sortField, setSortField] = useState<SortField>('fullName');
-  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
-
-  const handleSort = (field: SortField) => {
-    if (field === sortField) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortDirection('asc');
-    }
-  };
+  const [sortField] = useState<SortField>('fullName');
+  const [sortDirection] = useState<SortDirection>('asc');
 
   const sortedRoofers = [...roofersData].sort((a, b) => {
     let aValue: string | number;

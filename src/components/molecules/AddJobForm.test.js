@@ -1,10 +1,8 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import AddJobForm from "./AddJobForm";
 import { format } from "date-fns";
 import { vi } from "vitest";
-import { Button } from '../atoms/Button';
 vi.mock('../atoms', async () => {
     const actual = await vi.importActual('../atoms');
     return {
@@ -12,13 +10,13 @@ vi.mock('../atoms', async () => {
         Button: (props) => _jsx("button", { ...props, children: "Button" }),
         Input: (props) => _jsx("input", { ...props }),
         Select: (props) => _jsx("select", { ...props, children: _jsx("option", { children: "Option" }) }),
-        RadioGroup: (props) => _jsx("div", { children: "RadioGroup" }),
+        RadioGroup: () => _jsx("div", { children: "RadioGroup" }),
         Label: actual.Label,
         Textarea: (props) => _jsx("textarea", { ...props }),
         Popover: (props) => _jsx("div", { children: props.children }),
         PopoverTrigger: (props) => _jsx("div", { children: props.children }),
         PopoverContent: (props) => _jsx("div", { children: props.children }),
-        Calendar: (props) => _jsx("div", { children: "Calendar" }),
+        Calendar: () => _jsx("div", { children: "Calendar" }),
         Checkbox: (props) => _jsx("input", { type: "checkbox", ...props }),
     };
 });

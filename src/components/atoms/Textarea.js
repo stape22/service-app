@@ -1,3 +1,2 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React from 'react';
 export const Textarea = ({ label, error, className = '', ...props }) => (_jsxs("label", { className: `block w-full ${className}`, children: [label && _jsx("span", { className: "block mb-1 text-sm font-medium text-gray-700", children: label }), _jsx("textarea", { className: `block w-full rounded-md border border-input bg-input-background p-2 text-base text-foreground shadow-sm focus:border-ring focus:ring-2 focus:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 ${error ? 'border-destructive ring-destructive' : ''}`, "aria-invalid": !!error, ...props }), error && _jsx("span", { className: "mt-1 text-xs text-destructive", children: error })] }));

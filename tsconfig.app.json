@@ -14,6 +14,8 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "types": ["react"],
 
     /* Linting */
     "strict": true,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '../atoms/Table';
 import { Badge } from '../atoms/Badge';
+import { Button } from '../atoms/Button';
 
 export interface JobData {
   id: string;
@@ -14,6 +15,8 @@ export interface JobData {
 
 interface JobsTableProps {
   onEditJob?: (jobId: string) => void;
+  onDeleteJob?: (jobId: string) => void;
+  jobs?: JobData[];
 }
 
 const jobsData: JobData[] = [
@@ -35,7 +38,7 @@ const statusColors: Record<JobData['status'], string> = {
   'in-progress': 'bg-orange-100 text-orange-800 border-orange-200',
 };
 
-export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob }) => {
+export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jobs }) => {
   const [sortField, setSortField] = useState<SortField>('id');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
@@ -48,7 +51,7 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob }) => {
     }
   };
 
-  const sortedJobs = [...jobsData].sort((a, b) => {
+  const sortedJobs = [...(jobs || jobsData)].sort((a, b) => {
     let aValue: string | number = a[sortField];
     let bValue: string | number = b[sortField];
     if (sortField === 'id') {
@@ -106,20 +109,34 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob }) => {
             <TableHead className="cursor-pointer" onClick={() => handleSort('customer')}>
               <div className="flex items-center">Customer<SortIcon field="customer" /></div>
             </TableHead>
+            <TableHead>
+              <span className="sr-only">Actions</span>
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {sortedJobs.map((job) => (
-            <TableRow key={job.id} className="hover:bg-blue-50 cursor-pointer" onClick={() => onEditJob?.(job.id)}>
-              <TableCell className="text-right font-mono">{job.id}</TableCell>
-              <TableCell>{job.date}</TableCell>
-              <TableCell>{job.jobType}</TableCell>
-              <TableCell>
+            <TableRow key={job.id} className="hover:bg-blue-50 group">
+              <TableCell className="text-right font-mono cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.id}</TableCell>
+              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.date}</TableCell>
+              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.jobType}</TableCell>
+              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>
                 <Badge variant="secondary" className={`text-xs px-2 py-1 border ${statusColors[job.status]}`}>{job.status.replace('-', ' ')}</Badge>
               </TableCell>
-              <TableCell>{job.roofer}</TableCell>
-              <TableCell>{job.address}</TableCell>
-              <TableCell>{job.customer}</TableCell>
+              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.roofer}</TableCell>
+              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.address}</TableCell>
+              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.customer}</TableCell>
+              <TableCell>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  aria-label={`Delete job ${job.id}`}
+                  onClick={e => { e.stopPropagation(); onDeleteJob?.(job.id); }}
+                  className="opacity-80 group-hover:opacity-100"
+                >
+                  🗑
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

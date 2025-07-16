@@ -1,5 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import { LoginPage } from './components/pages/LoginPage';

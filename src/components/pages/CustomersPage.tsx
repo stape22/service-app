@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
 import { Customers } from '../organisms/Customers';
-import type { CustomerData } from '../organisms/Customers';
 
 export const CustomersPage: React.FC = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('customers');
 
   // Handlers for navigation and chat
@@ -15,7 +13,7 @@ export const CustomersPage: React.FC = () => {
     // TODO: Implement add customer flow
     alert('Add Customer clicked (to be implemented)');
   };
-  const handleEditCustomer = (customer: CustomerData) => {
+  const handleEditCustomer = () => {
     // TODO: Implement edit customer flow
     alert('Edit Customer clicked (to be implemented)');
   };
@@ -24,9 +22,7 @@ export const CustomersPage: React.FC = () => {
     <DashboardLayout
       currentPage={currentPage}
       onPageChange={handlePageChange}
-      isChatOpen={isChatOpen}
-      onChatToggle={() => setIsChatOpen((v) => !v)}
-      onChatClose={() => setIsChatOpen(false)}
+      // Removed isChatOpen, onChatToggle, onChatClose props as they are not defined in DashboardLayoutProps
     >
       <Customers onAddCustomer={handleAddCustomer} onEditCustomer={handleEditCustomer} />
     </DashboardLayout>

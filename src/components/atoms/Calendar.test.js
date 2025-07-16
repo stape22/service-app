@@ -1,5 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Calendar } from "./Calendar";
 describe("Calendar", () => {

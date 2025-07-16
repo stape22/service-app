@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../atoms/Button';
-import { Badge } from '../atoms/Badge';
+import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '../atoms/Table';
 // TODO: Replace with atomic/organism Table implementation. See dev-log.md for rationale.
 // import { Table } from '../../../Figma Design/components/ui/table';
 
@@ -200,115 +200,52 @@ export const Customers: React.FC<CustomersProps> = ({ onAddCustomer, onEditCusto
               Add Customer
             </Button>
           </div>
-
-          {/* Customers Table */}
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gray-50">
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Customer Name
-                  <SortIcon field="fullName" />
-                </div>
-              </div>
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Email Address
-                  <SortIcon field="email" />
-                </div>
-              </div>
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Phone Number
-                  <SortIcon field="phone" />
-                </div>
-              </div>
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Address
-                  <SortIcon field="address" />
-                </div>
-              </div>
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Type
-                  <SortIcon field="customerType" />
-                </div>
-              </div>
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Status
-                  <SortIcon field="status" />
-                </div>
-              </div>
-              <div className="font-medium text-gray-700">
-                <div className="flex items-center justify-start">
-                  Assigned Roofer
-                  <span className="w-4 h-4 ml-2"></span>
-                </div>
-              </div>
-              <div className="flex items-center justify-end font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-end">
-                  # of Jobs
-                  <SortIcon field="jobCount" />
-                </div>
-              </div>
-              <div className="flex items-center justify-start font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none">
-                <div className="flex items-center justify-start">
-                  Last Contact
-                  <SortIcon field="lastContact" />
-                </div>
-              </div>
-            </div>
-            <div className="TableBody">
-              {sortedCustomers.map((customer) => (
-                <div key={customer.id} className="hover:bg-gray-50">
-                  <div className="text-blue-600 hover:text-blue-800 hover:underline text-left">
-                    <button 
-                      onClick={() => onEditCustomer(customer)}
-                    >
-                      {customer.fullName}
-                    </button>
-                  </div>
-                  <div className="text-gray-900">{customer.email}</div>
-                  <div className="text-gray-900">{customer.phone}</div>
-                  <div className="text-gray-900">{customer.address}</div>
-                  <div>
-                    <Badge
-                      variant="primary" // Figma uses 'outline', mapped to 'primary' in local Badge
-                      className={`text-xs px-2 py-1 ${getCustomerTypeColor(customer.customerType)}`}
-                    >
-                      {customer.customerType === 'residential' ? 'Residential' : 'Commercial'}
-                    </Badge>
-                  </div>
-                  <div>
-                    <Badge
-                      variant="primary" // Figma uses 'outline', mapped to 'primary' in local Badge
-                      className={`text-xs px-2 py-1 ${getStatusColor(customer.status)}`}
-                    >
-                      {customer.status === 'active' ? 'Active' : 'Inactive'}
-                    </Badge>
-                  </div>
-                  <div>
-                    {customer.assignedRoofer ? (
-                      <Badge
-                        variant="primary" // Figma uses 'outline', mapped to 'primary' in local Badge
-                        className="text-xs px-2 py-1 bg-orange-100 text-orange-800 border-orange-200"
-                      >
-                        {customer.assignedRoofer}
-                      </Badge>
-                    ) : (
-                      <span className="text-gray-400 text-sm">No roofer assigned</span>
-                    )}
-                  </div>
-                  <div className="text-right text-gray-900">
-                    {customer.jobCount}
-                  </div>
-                  <div className="text-gray-900">
-                    {new Date(customer.lastContact).toLocaleDateString()}
-                  </div>
-                </div>
-              ))}
-            </div>
+          {/* Customer Table */}
+          <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead onClick={() => handleSort('fullName')} className="cursor-pointer">Name{<SortIcon field="fullName" />}</TableHead>
+                  <TableHead onClick={() => handleSort('email')} className="cursor-pointer">Email{<SortIcon field="email" />}</TableHead>
+                  <TableHead onClick={() => handleSort('phone')} className="cursor-pointer">Phone{<SortIcon field="phone" />}</TableHead>
+                  <TableHead onClick={() => handleSort('address')} className="cursor-pointer">Address{<SortIcon field="address" />}</TableHead>
+                  <TableHead onClick={() => handleSort('customerType')} className="cursor-pointer">Type{<SortIcon field="customerType" />}</TableHead>
+                  <TableHead onClick={() => handleSort('status')} className="cursor-pointer">Status{<SortIcon field="status" />}</TableHead>
+                  <TableHead onClick={() => handleSort('jobCount')} className="cursor-pointer">Jobs{<SortIcon field="jobCount" />}</TableHead>
+                  <TableHead onClick={() => handleSort('lastContact')} className="cursor-pointer">Last Contact{<SortIcon field="lastContact" />}</TableHead>
+                  <TableHead>Assigned Roofer</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sortedCustomers.map((customer) => (
+                  <TableRow key={customer.id}>
+                    <TableCell>{customer.fullName}</TableCell>
+                    <TableCell>{customer.email}</TableCell>
+                    <TableCell>{customer.phone}</TableCell>
+                    <TableCell>{customer.address}</TableCell>
+                    <TableCell>
+                      <span className={`inline-block px-2 py-1 rounded border text-xs font-medium ${getCustomerTypeColor(customer.customerType)}`}>
+                        {customer.customerType.charAt(0).toUpperCase() + customer.customerType.slice(1)}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <span className={`inline-block px-2 py-1 rounded border text-xs font-medium ${getStatusColor(customer.status)}`}>
+                        {customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}
+                      </span>
+                    </TableCell>
+                    <TableCell>{customer.jobCount}</TableCell>
+                    <TableCell>{customer.lastContact}</TableCell>
+                    <TableCell>{customer.assignedRoofer || '-'}</TableCell>
+                    <TableCell>
+                      <Button variant="outline" size="sm" onClick={() => onEditCustomer(customer)}>
+                        Edit
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </div>
       </main>

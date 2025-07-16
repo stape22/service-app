@@ -1,9 +1,7 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import AddJobForm from "./AddJobForm";
 import { format } from "date-fns";
 import { vi } from "vitest";
-import { Button } from '../atoms/Button';
 
 vi.mock('../atoms', async () => {
   const actual = await vi.importActual('../atoms');
@@ -12,13 +10,13 @@ vi.mock('../atoms', async () => {
     Button: (props: any) => <button {...props}>Button</button>,
     Input: (props: any) => <input {...props} />,
     Select: (props: any) => <select {...props}><option>Option</option></select>,
-    RadioGroup: (props: any) => <div>RadioGroup</div>,
+    RadioGroup: () => <div>RadioGroup</div>,
     Label: actual.Label,
     Textarea: (props: any) => <textarea {...props} />,
     Popover: (props: any) => <div>{props.children}</div>,
     PopoverTrigger: (props: any) => <div>{props.children}</div>,
     PopoverContent: (props: any) => <div>{props.children}</div>,
-    Calendar: (props: any) => <div>Calendar</div>,
+    Calendar: () => <div>Calendar</div>,
     Checkbox: (props: any) => <input type="checkbox" {...props} />,
   };
 });

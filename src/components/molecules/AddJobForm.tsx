@@ -2,8 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Button, Input, Label, Select, RadioGroup, Textarea, Popover, PopoverTrigger, PopoverContent, Calendar, Checkbox } from "../atoms";
 import { format } from "date-fns";
 
+interface JobFormData {
+  jobNumber: string;
+  customer: string;
+  jobType: string;
+  status: string;
+  priority: string;
+  estimatedCost: string;
+  description: string;
+  notes: string;
+}
+
+interface RoofingSpecsData {
+  gutterTotalFootage: string;
+  gutterType: string;
+  gutterColor: string;
+  gutterSpecialtyItems: string;
+  downspoutSize: string;
+  leafGuardSize: string;
+  leafGuardTotalFootage: string;
+  leafGuardType: string;
+  storyOptions: string[];
+  crewCount: string;
+  timeFrame: string;
+}
+
 interface AddJobFormProps {
   onBack: () => void;
+  initialJob?: {
+    formData: JobFormData;
+    scheduledDate: Date | null;
+    roofingSpecs: RoofingSpecsData;
+  };
+  onSubmit?: (job: { formData: JobFormData; scheduledDate: Date | null; roofingSpecs: RoofingSpecsData }) => void;
 }
 
 const availableCustomers = [
@@ -14,32 +45,36 @@ const availableCustomers = [
   { name: 'Robert Johnson', assignedRoofer: 'Jennifer Martinez', address: '654 Pine Street, Decatur, IL 62521' }
 ];
 
-export const AddJobForm: React.FC<AddJobFormProps> = ({ onBack }) => {
-  const [formData, setFormData] = useState({
-    jobNumber: '',
-    customer: '',
-    jobType: 'repair',
-    status: 'scheduled',
-    priority: 'medium',
-    estimatedCost: '',
-    description: '',
-    notes: '',
-  });
-  const [scheduledDate, setScheduledDate] = useState<Date | null>(null);
+export const AddJobForm: React.FC<AddJobFormProps> = ({ onBack, initialJob, onSubmit }) => {
+  const [formData, setFormData] = useState<JobFormData>(
+    initialJob?.formData || {
+      jobNumber: '',
+      customer: '',
+      jobType: 'repair',
+      status: 'scheduled',
+      priority: 'medium',
+      estimatedCost: '',
+      description: '',
+      notes: '',
+    }
+  );
+  const [scheduledDate, setScheduledDate] = useState<Date | null>(initialJob?.scheduledDate ?? null);
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [roofingSpecs, setRoofingSpecs] = useState({
-    gutterTotalFootage: '',
-    gutterType: '',
-    gutterColor: '',
-    gutterSpecialtyItems: '',
-    downspoutSize: '',
-    leafGuardSize: '',
-    leafGuardTotalFootage: '',
-    leafGuardType: '',
-    storyOptions: [] as string[],
-    crewCount: '',
-    timeFrame: '',
-  });
+  const [roofingSpecs, setRoofingSpecs] = useState<RoofingSpecsData>(
+    initialJob?.roofingSpecs || {
+      gutterTotalFootage: '',
+      gutterType: '',
+      gutterColor: '',
+      gutterSpecialtyItems: '',
+      downspoutSize: '',
+      leafGuardSize: '',
+      leafGuardTotalFootage: '',
+      leafGuardType: '',
+      storyOptions: [],
+      crewCount: '',
+      timeFrame: '',
+    }
+  );
 
   // Generate next job number (simplified for demo)
   const generateJobNumber = () => {
@@ -48,19 +83,19 @@ export const AddJobForm: React.FC<AddJobFormProps> = ({ onBack }) => {
     return `JOB-${currentYear}-${randomNum}`;
   };
 
-  // Auto-generate job number if empty
+  // Auto-generate job number if empty and not in edit mode
   useEffect(() => {
-    if (!formData.jobNumber) {
+    if (!formData.jobNumber && !initialJob) {
       setFormData(prev => ({ ...prev, jobNumber: generateJobNumber() }));
     }
     // eslint-disable-next-line
-  }, []);
+  }, [initialJob]);
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: keyof JobFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleRoofingSpecChange = (field: string, value: string) => {
+  const handleRoofingSpecChange = (field: keyof RoofingSpecsData, value: string) => {
     setRoofingSpecs(prev => ({ ...prev, [field]: value }));
   };
 
@@ -75,15 +110,19 @@ export const AddJobForm: React.FC<AddJobFormProps> = ({ onBack }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // For MVP, just log the data
     const jobData = {
-      ...formData,
-      scheduledDate: scheduledDate ? scheduledDate.toISOString().split('T')[0] : '',
+      formData,
+      scheduledDate,
       roofingSpecs,
     };
-    // eslint-disable-next-line no-console
-    console.log('Job data:', jobData);
-    if (onBack) onBack();
+    if (onSubmit) {
+      onSubmit(jobData);
+    } else if (onBack) {
+      // For MVP, just log the data
+      // eslint-disable-next-line no-console
+      console.log('Job data:', jobData);
+      onBack();
+    }
   };
 
   const selectedCustomer = availableCustomers.find(c => c.name === formData.customer);
@@ -95,8 +134,8 @@ export const AddJobForm: React.FC<AddJobFormProps> = ({ onBack }) => {
       {/* Page Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Add Job</h1>
-          <p className="text-gray-600 mt-1">Create a new roofing job in the system</p>
+          <h1 className="text-2xl font-semibold text-gray-900">{initialJob ? 'Edit Job' : 'Add Job'}</h1>
+          <p className="text-gray-600 mt-1">{initialJob ? 'Edit job details and save changes' : 'Create a new roofing job in the system'}</p>
         </div>
         <Button variant="outline" type="button" onClick={onBack}>
           Back to Jobs List

@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useEffect } from 'react';
-import { Button } from './Button';
+import { useEffect } from 'react';
 export const Modal = ({ isOpen, onClose, title, children, size = 'md', showCloseButton = true, className = '' }) => {
     useEffect(() => {
         const handleEscape = (e) => {

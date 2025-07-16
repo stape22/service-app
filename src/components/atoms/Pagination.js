@@ -1,6 +1,6 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
-import React from 'react';
 import { Button } from './Button';
+import React from 'react';
 export const Pagination = ({ currentPage, totalPages, onPageChange, totalItems, itemsPerPage, showInfo = true, className = '' }) => {
     const getVisiblePages = () => {
         const delta = 2;

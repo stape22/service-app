@@ -1,5 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Textarea } from './Textarea';
 import { vi } from 'vitest';

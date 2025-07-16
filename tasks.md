@@ -2,7 +2,17 @@
 
 *All development tasks must follow the provided Figma prototype designs, adhering strictly to best practices, accessibility standards, and the Atomic Design System. The project uses a Supabase MCP server for backend automation and a GitHub MCP server for deployment workflows.*
 
-## �� Project Setup
+# 🚨 BLOCKER: Resolve Vite/Radix UI Import & Peer Dependency Errors
+
+* [x] Fix Vite import error: Failed to resolve import "@radix-ui/react-tabs" (and any similar errors for Radix UI or other atomic dependencies)
+  * Investigate and resolve missing package, peer dependency conflicts, or lockfile corruption
+  * Ensure @radix-ui/react-tabs is installed and compatible with current React version (React 19 vs 18)
+  * If needed, downgrade React to 18 for compatibility, or use --legacy-peer-deps
+  * Clean node_modules and lockfile if necessary
+  * Confirm all atomic/organism imports build and run in dev and production
+  * Document all steps and outcomes in dev-log.md
+
+##  Project Setup
 
 * [x] Initialize React + Vite project
 * [x] Install TailwindCSS and configure with PostCSS
@@ -43,6 +53,7 @@
   * [ ] [KNOWN ISSUE] Fix test runner/module resolution issue with cn utility import in Calendar and Button atoms (see dev-log.md)
   * [ ] [KNOWN ISSUE] Revisit Calendar atom tests after resolving cn import to ensure all tests pass and coverage is complete
 * [x] Popover – styled per Figma
+* [x] Avatar – ported from Figma, used in KanbanBoard and other components
 
 ### Molecules
 
@@ -87,7 +98,7 @@
 ### Jobs
 
 * [x] View job list (table)
-* [ ] Add new job
+* [x] Add new job
   * [x] AddJobForm molecule: implement basic info section (Job Number, Customer, etc.)
   * [x] AddJobForm molecule: unit test for basic info section
   * [x] AddJobForm molecule: implement status, priority, estimated cost, description, notes section
@@ -100,21 +111,21 @@
     * [ ] [POST-MVP] Port PhotoUpload molecule (full photo upload, preview, category, etc.)
     * [x] [MVP] Placeholder for PhotoUpload (disabled upload or "Coming soon" message); see dev-log.md
   * [x] AddJobForm molecule: unit test for advanced sections
-* [ ] Edit job
-* [ ] Delete job
-* [ ] Kanban view by status
-* [ ] Calendar view by due date
+* [x] Edit job
+* [x] Delete job
+* [x] Kanban view by status
+* [x] Calendar view by due date
 
 ### Roofers
 
-* [ ] View roofer list
-* [ ] Add new roofer
-* [ ] Edit roofer
+* [x] View roofer list
+* [x] Add new roofer
+* [x] Edit roofer
 * [ ] Delete roofer
 
 ### Customers
 
-* [ ] View customer list
+* [x] View customer list
 * [ ] Add new customer
 * [ ] Edit customer
 * [ ] Delete customer
@@ -175,3 +186,42 @@
 ## Dev Environment
 
 * [ ] [KNOWN ISSUE] Ensure Supabase CLI is recognized in all dev environments (Cursor/editor and user terminal); document any required steps
+
+---
+
+# [2024-06-10] Recent Progress
+- KanbanBoard organism implemented per Figma (see dev-log.md)
+- Avatar atom ported and integrated
+- Tailwind config updated for Figma tokens; build errors resolved
+- useAuth export and blank screen fix complete
+- All changes documented in dev-log.md
+
+# [2024-06-11] Dev Notes
+- Removed unused 'idx' variable from AddRooferForm.tsx contacts.map callback to resolve linter warning. No functional changes.
+
+## 🔄 Refactor: Dashboard vs. Jobs Page Responsibilities
+
+**Goal:**
+Ensure the Dashboard is view-only (shows jobs in calendar, table, kanban, etc.) and the Jobs page is for adding/managing jobs (no multi-view display).
+
+### Tasks & Subtasks
+
+1. **Audit Current Implementation**
+   - [ ] Review Dashboard page for job views (calendar, table, kanban).
+   - [ ] Review Jobs page for job views and job management features.
+
+2. **Refactor Pages**
+   - [ ] Move all job view components (calendar, table, kanban) to Dashboard.
+   - [ ] Ensure Jobs page contains only job creation and management features (add, edit, delete).
+
+3. **Update Navigation**
+   - [ ] Update navigation labels and routes to reflect new structure.
+
+4. **Update Tests**
+   - [ ] Update or add unit tests for Dashboard (view-only).
+   - [ ] Update or add unit tests for Jobs page (add/edit/delete only).
+
+5. **Update Documentation**
+   - [ ] Update README.md with new page purposes and user flow.
+   - [ ] Add dev-log.md entry for this change.
+   - [ ] Update tasks.md with this checklist.

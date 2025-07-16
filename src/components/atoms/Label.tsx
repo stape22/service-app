@@ -1,4 +1,4 @@
-import * as React from "react";
+import { forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/index";
 
@@ -29,7 +29,7 @@ export interface LabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement>,
     VariantProps<typeof labelVariants> {}
 
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ className, variant, size, ...props }, ref) => (
     <label
       ref={ref}

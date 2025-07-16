@@ -10,6 +10,8 @@ export interface JobData {
 }
 interface JobsTableProps {
     onEditJob?: (jobId: string) => void;
+    onDeleteJob?: (jobId: string) => void;
+    jobs?: JobData[];
 }
 export declare const JobsTable: React.FC<JobsTableProps>;
 export {};

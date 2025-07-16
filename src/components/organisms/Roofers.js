@@ -72,17 +72,8 @@ const roofersData = [
     }
 ];
 export const Roofers = ({ onAddRoofer, onEditRoofer }) => {
-    const [sortField, setSortField] = useState('fullName');
-    const [sortDirection, setSortDirection] = useState('asc');
-    const handleSort = (field) => {
-        if (field === sortField) {
-            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-        }
-        else {
-            setSortField(field);
-            setSortDirection('asc');
-        }
-    };
+    const [sortField] = useState('fullName');
+    const [sortDirection] = useState('asc');
     const sortedRoofers = [...roofersData].sort((a, b) => {
         let aValue;
         let bValue;

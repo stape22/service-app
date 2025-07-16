@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../supabase/client';
 const AuthContext = createContext(undefined);
 export const AuthProvider = ({ children }) => {
@@ -55,9 +55,9 @@ export const AuthProvider = ({ children }) => {
     };
     return (_jsx(AuthContext.Provider, { value: { user, session, loading, error, login, logout, signup }, children: children }));
 };
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context)
+export function useAuth() {
+    const ctx = useContext(AuthContext);
+    if (!ctx)
         throw new Error('useAuth must be used within an AuthProvider');
-    return context;
-};
+    return ctx;
+}

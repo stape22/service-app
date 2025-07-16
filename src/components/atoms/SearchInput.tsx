@@ -51,7 +51,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         placeholder={placeholder}
         value={internalValue}
         onChange={handleChange}
-        size={size}
+        inputSize={size}
         className="pl-10"
       />
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

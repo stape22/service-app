@@ -1,5 +1,4 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import React from 'react';
 export const LoadingSpinner = ({ size = 'md', className = '' }) => {
     const sizeClasses = {
         sm: 'w-4 h-4',

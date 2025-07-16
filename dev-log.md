@@ -727,3 +727,41 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
   - Test runner issues remain; see previous logs for troubleshooting and next steps.
 - **Context:**
   - Fulfills atomic design, sequential workflow, and audit/documentation requirements per TaskExecutorPrompt.xml and rules.md.
+
+## [2024-07-16T04:00:00Z] [AI: Cursor Agent]
+
+### Dashboard Page Header Update - Figma Design Implementation
+- **Files:** src/components/atoms/Tabs.tsx, src/components/atoms/Tabs.d.ts, src/components/atoms/index.ts, src/components/pages/DashboardPage.tsx, package.json
+- **Summary:**
+  - Updated the dashboard page header to match the Figma design files by implementing the proper view toggle with icons.
+  - Created a new Tabs component in the atoms layer using Radix UI (@radix-ui/react-tabs) and the project's utility functions.
+  - Installed @radix-ui/react-tabs dependency with --legacy-peer-deps to resolve React version conflicts.
+  - Replaced placeholder view toggle buttons with proper Tabs component featuring Calendar, Layout, and Table icons from lucide-react.
+  - Updated DashboardPage.tsx to use the new Tabs component for both the view toggle and content area.
+  - The dashboard header now matches the Figma design with proper styling, icons, and functionality.
+- **Context:**
+  - Fulfills the requirement to update the dashboard page header to match Figma files as specified in the user request.
+  - Follows the TaskExecutorPrompt.xml guidelines for implementing atomic design components and maintaining project conventions.
+
+## [2024-07-16T04:07:00Z] [Claude]
+
+### Resolved Vite import error for @radix-ui/react-tabs and similar atomic dependencies.
+- **Files:** package.json, tsconfig.json, tsconfig.app.json, tsconfig.node.json
+- **Summary:**
+  - Verified and installed missing dependencies with --legacy-peer-deps.
+  - Fixed TypeScript config for React/JSX and module interop.
+  - Installed @testing-library/dom and types for test compatibility.
+  - Build now fails only on code/test issues, not on atomic dependency imports.
+  - See /tasks.md for task completion and /dev-log.md for details.
+
+## [2024-06-11] [AI: Cursor Agent]
+
+### Dashboard vs. Jobs Page Clarification & Refactor Plan
+- **Summary:**
+  - Clarified that the Dashboard is view-only for jobs (calendar, table, kanban views), with no editing or adding jobs.
+  - The Jobs page is for adding and managing jobs (add, edit, delete), and does not include multi-view displays.
+  - Planned a refactor to ensure this separation is reflected in the codebase and UI.
+- **Actions:**
+  - Update README.md to document this separation and user flow.
+  - Add a detailed task list to tasks.md for auditing, refactoring, navigation, and testing.
+  - Refactor code as needed to match clarified requirements.

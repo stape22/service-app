@@ -3,8 +3,13 @@ import { Table } from '../atoms/Table';
 import { SearchInput } from '../atoms/SearchInput';
 import { Pagination } from '../atoms/Pagination';
 import { LoadingState, SkeletonTable } from '../atoms/LoadingState';
-import { Button } from '../atoms/Button';
-import { Badge } from '../atoms/Badge';
+import {
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '../atoms/Table';
 
 interface Column<T> {
   key: keyof T | string;
@@ -86,64 +91,6 @@ export function DataTable<T extends Record<string, any>>({
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-  // Prepare table data
-  const tableData = paginatedData.map(row => {
-    const rowData: Record<string, React.ReactNode> = {};
-    
-    columns.forEach(column => {
-      const value = row[column.key as keyof T];
-      rowData[column.key as string] = column.render ? column.render(value, row) : value;
-    });
-
-    // Add actions column if needed
-    if (onEdit || onDelete || actions.length > 0) {
-      rowData.actions = (
-        <div className="flex items-center space-x-2">
-          {actions.map((action, index) => (
-            <Button
-              key={index}
-              variant={action.variant || 'outline'}
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                action.onClick(row);
-              }}
-            >
-              {action.icon}
-              {action.label}
-            </Button>
-          ))}
-          {onEdit && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                onEdit(row);
-              }}
-            >
-              Edit
-            </Button>
-          )}
-          {onDelete && (
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                onDelete(row);
-              }}
-            >
-              Delete
-            </Button>
-          )}
-        </div>
-      );
-    }
-
-    return rowData;
-  });
-
   // Prepare table headers
   const tableHeaders = columns.map(col => col.header);
   if (onEdit || onDelete || actions.length > 0) {
@@ -174,12 +121,24 @@ export function DataTable<T extends Record<string, any>>({
             {searchTerm ? 'No results found' : emptyMessage}
           </div>
         ) : (
-          <Table
-            headers={tableHeaders}
-            data={tableData}
-            onRowClick={onRowClick ? (index) => onRowClick(paginatedData[index]) : undefined}
-            className="w-full"
-          />
+          <Table className="min-w-full divide-y divide-gray-200">
+            <TableHeader>
+              <TableRow>
+                {tableHeaders.map((header) => (
+                  <TableHead key={header}>{header}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {paginatedData.map((row, rowIndex) => (
+                <TableRow key={rowIndex} onClick={onRowClick ? () => onRowClick(row) : undefined}>
+                  {tableHeaders.map((header) => (
+                    <TableCell key={header}>{row[header]}</TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         )}
       </LoadingState>
 

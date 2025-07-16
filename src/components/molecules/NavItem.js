@@ -1,5 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 export const NavItem = ({ to, label, icon, exact = false, className = '', ...props }) => {
     const location = useLocation();

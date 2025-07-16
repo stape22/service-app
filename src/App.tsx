@@ -5,6 +5,10 @@ import { LoginPage } from './components/pages/LoginPage';
 import { SignupPage } from './components/pages/SignupPage';
 import { useAuth } from './context/AuthContext';
 import { DashboardPage } from './components/pages/DashboardPage';
+import { JobsPage } from './components/pages/JobsPage';
+import { RoofersPage } from './components/pages/RoofersPage';
+import { CustomersPage } from './components/pages/CustomersPage';
+import { NotFoundPage } from './components/pages/NotFoundPage';
 
 function RootRedirect() {
   const { user, loading } = useAuth();
@@ -24,6 +28,22 @@ function App() {
             <DashboardPage />
           </ProtectedRoute>
         } />
+        <Route path="/dashboard/jobs" element={
+          <ProtectedRoute>
+            <JobsPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard/roofers" element={
+          <ProtectedRoute>
+            <RoofersPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard/customers" element={
+          <ProtectedRoute>
+            <CustomersPage />
+          </ProtectedRoute>
+        } />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

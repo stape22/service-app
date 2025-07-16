@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../atoms/Button';
 import { Badge } from '../atoms/Badge';
 const getCustomerTypeColor = (type) => {

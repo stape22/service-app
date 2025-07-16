@@ -1,6 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { SignupForm } from './SignupForm';
 // Mock AuthContext

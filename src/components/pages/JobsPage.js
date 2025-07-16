@@ -1,21 +1,30 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import React, { useState } from 'react';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
-// TODO: Replace with atomic/organism Jobs implementation. See dev-log.md for rationale.
-// import { Jobs } from '../../../Figma Design/components/Jobs';
+import { JobsTable } from '../molecules/JobsTable';
+import { LoadingSpinner } from '../atoms/LoadingSpinner';
+import { useToast } from '../../context/ToastContext';
 export const JobsPage = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState('jobs');
+    const [loading, setLoading] = useState(false);
+    const { showToast } = useToast();
     // Handlers for navigation and chat
     const handlePageChange = (page) => setCurrentPage(page);
-    // Placeholder handlers for add/edit job (to be implemented in future tasks)
-    const handleAddJob = () => {
-        // TODO: Implement add job flow
-        alert('Add Job clicked (to be implemented)');
+    // Handler for edit job with loading state and error handling
+    const handleEditJob = async (jobId) => {
+        setLoading(true);
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            showToast('info', `Edit Job clicked for ${jobId} (to be implemented)`);
+        }
+        catch (error) {
+            showToast('error', 'Failed to load job details');
+        }
+        finally {
+            setLoading(false);
+        }
     };
-    const handleEditJob = (job) => {
-        // TODO: Implement edit job flow
-        alert('Edit Job clicked (to be implemented)');
-    };
-    return (_jsx(DashboardLayout, { currentPage: currentPage, onPageChange: handlePageChange, isChatOpen: isChatOpen, onChatToggle: () => setIsChatOpen((v) => !v), onChatClose: () => setIsChatOpen(false), children: _jsx("div", { children: "Jobs component placeholder" }) }));
+    return (_jsx(DashboardLayout, { currentPage: currentPage, onPageChange: handlePageChange, isChatOpen: isChatOpen, onChatToggle: () => setIsChatOpen((v) => !v), onChatClose: () => setIsChatOpen(false), children: _jsx("main", { className: "px-6 lg:px-8 py-8", children: _jsxs("div", { className: "max-w-full mx-auto", children: [_jsx("div", { className: "flex items-center justify-between mb-8", children: _jsxs("div", { children: [_jsx("h1", { className: "text-2xl font-semibold text-gray-900", children: "Jobs" }), _jsx("p", { className: "text-gray-600 mt-1", children: "Manage all roofing jobs and their status" })] }) }), loading ? (_jsx("div", { className: "bg-white rounded-lg border border-gray-200 p-12", children: _jsxs("div", { className: "text-center", children: [_jsx(LoadingSpinner, { size: "lg", className: "mb-4" }), _jsx("p", { className: "text-gray-600", children: "Loading job details..." })] }) })) : (_jsx("div", { className: "bg-white rounded-lg border border-gray-200 overflow-hidden", children: _jsx(JobsTable, { onEditJob: handleEditJob }) }))] }) }) }));
 };

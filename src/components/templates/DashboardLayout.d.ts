@@ -1,8 +1,8 @@
 import React from 'react';
 interface DashboardLayoutProps {
     children: React.ReactNode;
-    currentPage: any;
-    onPageChange: (page: any) => void;
+    currentPage: string;
+    onPageChange: (page: string) => void;
     isChatOpen: boolean;
     onChatToggle: () => void;
     onChatClose: () => void;

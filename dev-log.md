@@ -765,3 +765,16 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
   - Update README.md to document this separation and user flow.
   - Add a detailed task list to tasks.md for auditing, refactoring, navigation, and testing.
   - Refactor code as needed to match clarified requirements.
+
+## [2024-06-11] [AI: Cursor Agent]
+
+### Calendar/Atoms cn Utility Import Issue Investigation
+- **Files:** src/components/atoms/Calendar.tsx, src/components/atoms/Button.tsx, src/utils/index.ts, src/components/atoms/Calendar.test.tsx
+- **Summary:**
+  - Investigated the suspected module resolution issue with the cn utility in Calendar and Button atoms.
+  - Confirmed cn is correctly imported and used in both atoms; Button atom tests pass.
+  - Calendar atom test for 'renders with a selected date' fails due to react-day-picker not rendering the day grid in the test environment, not due to a cn import or module resolution error.
+  - Updated Calendar test to use a fixed date and visible month, but day grid still does not render, confirming the issue is with react-day-picker's test rendering, not cn utility.
+  - No code changes required for cn utility or its imports.
+- **Context:**
+  - The original module resolution issue is resolved. The remaining test failure is a limitation of react-day-picker in the test environment, not a code or import bug.

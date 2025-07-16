@@ -703,3 +703,18 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
 2024-07-15T15:10:00Z | Claude | src/components/molecules/AddJobForm.tsx, tasks.md | Marked AddJobForm advanced sections (roofing specs, drawing, photos, submission) as implemented for MVP with placeholders, per Figma and tasks.md. Task marked as done.
 
 2024-07-15T15:20:00Z | Claude | src/components/molecules/AddJobForm.test.tsx, tasks.md | Implemented unit tests for AddJobForm advanced sections (roofing specs, drawing, photos), including MVP placeholders. Marked task as done.
+
+## [2024-07-16] [AI: Cursor Agent]
+
+### Login/Sign In Pages Enhancement
+- **Files:** src/components/templates/AuthPageTemplate.tsx, src/components/molecules/AuthForm.tsx, src/components/organisms/LoginForm.tsx, src/components/organisms/SignupForm.tsx, src/components/pages/LoginPage.tsx, src/components/pages/SignupPage.tsx, src/components/atoms/Input.tsx, src/components/atoms/Button.tsx, src/components/atoms/Label.tsx, tasks.md
+- **Summary:**
+  - Enhanced AuthPageTemplate with modern gradient background, logo/branding section, and professional footer
+  - Updated AuthForm molecule with better spacing, error styling with icons, and improved loading states
+  - Enhanced LoginForm with field icons, "Remember me" checkbox, and "Forgot password" link
+  - Enhanced SignupForm with password confirmation, terms acceptance, and better validation
+  - Updated LoginPage and SignupPage with subtitles and cross-navigation links
+  - Converted Input, Button, and Label atoms from DaisyUI to proper Tailwind CSS classes
+  - Installed missing dependencies (class-variance-authority, clsx, tailwind-merge) for Button component
+  - Marked enhancement task as complete in tasks.md
+- **Context:** The login/sign in pages now have a modern, professional design that follows best UX practices and provides a polished user experience. All components use consistent Tailwind CSS styling and maintain accessibility standards.

@@ -22,6 +22,7 @@
 * [x] Create reusable <ProtectedRoute /> wrapper
 * [x] Build Login form (email/password) – follow Figma design
 * [x] Build Signup form (email/password) – follow Figma design
+* [x] Enhanced Login/Signup forms with modern design, icons, and improved UX
 * [x] Add form validation and error handling
 * [x] Redirect on successful login/signup
 

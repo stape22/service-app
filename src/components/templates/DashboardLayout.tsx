@@ -1,39 +1,54 @@
-import React from 'react';
-// TODO: Replace with atomic/molecule/organism equivalents. See dev-log.md for rationale.
-// import { Header } from '../../../Figma Design/components/Header';
-// import { ChatPanel } from '../../../Figma Design/components/ChatPanel';
+import React, { useState } from 'react';
+import { TopNav } from '../organisms/TopNav';
+import { Sidebar } from '../organisms/Sidebar';
 
-// TODO: Unify CurrentPage type after atomic migration
-// For now, use 'any' to avoid type conflicts from Figma import
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  currentPage: any;
-  onPageChange: (page: any) => void;
-  isChatOpen: boolean;
-  onChatToggle: () => void;
-  onChatClose: () => void;
+  currentPage?: string;
+  onPageChange?: (page: string) => void;
 }
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   children,
-  currentPage,
+  currentPage = 'dashboard',
   onPageChange,
-  isChatOpen,
-  onChatToggle,
-  onChatClose,
 }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* <Header 
-        onChatToggle={onChatToggle}
+      <TopNav 
+        onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
         currentPage={currentPage}
         onPageChange={onPageChange}
-      /> */}
+      />
+      
       <div className="flex">
-        <div className={`flex-1 transition-all duration-300 ${isChatOpen ? 'mr-80' : ''}`}>
-          {children}
+        {/* Sidebar - hidden on mobile, shown on desktop */}
+        <div className={`fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          <Sidebar 
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+            onClose={() => setSidebarOpen(false)}
+          />
         </div>
-        {/* <ChatPanel isOpen={isChatOpen} onClose={onChatClose} /> */}
+        
+        {/* Overlay for mobile */}
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+        
+        {/* Main content */}
+        <div className="flex-1 lg:ml-0">
+          <main className="p-4 lg:p-6">
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   );

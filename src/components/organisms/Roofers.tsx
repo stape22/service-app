@@ -16,8 +16,10 @@ export interface RooferData {
 }
 
 interface RoofersProps {
+  roofers: RooferData[];
   onAddRoofer: () => void;
   onEditRoofer: (roofer: RooferData) => void;
+  onDeleteRoofer?: (id: number) => void;
 }
 
 type SortField = 'fullName' | 'email' | 'phone' | 'address' | 'availability' | 'contactCount';
@@ -42,64 +44,11 @@ const getCertificationColor = (certification: string) => {
   }
 };
 
-const roofersData: RooferData[] = [
-  {
-    id: 1,
-    fullName: 'Michael Rodriguez',
-    email: 'michael.r@example.com',
-    phone: '(555) 123-4567',
-    address: '1234 Oak Street',
-    availability: 'full-time',
-    certifications: ['Licensed', 'Insured'],
-    contactCount: 3
-  },
-  {
-    id: 2,
-    fullName: 'Sarah Johnson',
-    email: 'sarah.j@example.com',
-    phone: '(555) 987-6543',
-    address: '1234 Oak Street',
-    availability: 'part-time',
-    certifications: ['Licensed', 'Insured', 'Bonded'],
-    contactCount: 2
-  },
-  {
-    id: 3,
-    fullName: 'David Thompson',
-    email: 'david.t@example.com',
-    phone: '(555) 234-5678',
-    address: '1234 Oak Street',
-    availability: 'full-time',
-    certifications: ['Licensed'],
-    contactCount: 0
-  },
-  {
-    id: 4,
-    fullName: 'Jennifer Martinez',
-    email: 'jennifer.m@example.com',
-    phone: '(555) 345-6789',
-    address: '1234 Oak Street',
-    availability: 'full-time',
-    certifications: ['Licensed', 'Insured'],
-    contactCount: 1
-  },
-  {
-    id: 5,
-    fullName: 'Robert Wilson',
-    email: 'robert.w@example.com',
-    phone: '(555) 456-7890',
-    address: '1234 Oak Street',
-    availability: 'part-time',
-    certifications: ['Licensed', 'Insured'],
-    contactCount: 4
-  }
-];
-
-export const Roofers: React.FC<RoofersProps> = ({ onAddRoofer, onEditRoofer }) => {
+export const Roofers: React.FC<RoofersProps> = ({ roofers, onAddRoofer, onEditRoofer, onDeleteRoofer }) => {
   const [sortField] = useState<SortField>('fullName');
   const [sortDirection] = useState<SortDirection>('asc');
 
-  const sortedRoofers = [...roofersData].sort((a, b) => {
+  const sortedRoofers = [...roofers].sort((a, b) => {
     let aValue: string | number;
     let bValue: string | number;
 
@@ -213,8 +162,8 @@ export const Roofers: React.FC<RoofersProps> = ({ onAddRoofer, onEditRoofer }) =
             </div>
             <div>
               {sortedRoofers.map((roofer) => (
-                <div key={roofer.id} className="hover:bg-gray-50 p-2 border-b last:border-b-0">
-                  <div>
+                <div key={roofer.id} className="hover:bg-gray-50 p-2 border-b last:border-b-0 flex items-center">
+                  <div className="flex-1">
                     <button 
                       className="text-blue-600 hover:text-blue-800 hover:underline text-left"
                       onClick={() => onEditRoofer(roofer)}
@@ -222,10 +171,10 @@ export const Roofers: React.FC<RoofersProps> = ({ onAddRoofer, onEditRoofer }) =
                       {roofer.fullName}
                     </button>
                   </div>
-                  <div className="text-gray-900">{roofer.email}</div>
-                  <div className="text-gray-900">{roofer.phone}</div>
-                  <div className="text-gray-900">{roofer.address}</div>
-                  <div>
+                  <div className="flex-1 text-gray-900">{roofer.email}</div>
+                  <div className="flex-1 text-gray-900">{roofer.phone}</div>
+                  <div className="flex-1 text-gray-900">{roofer.address}</div>
+                  <div className="flex-1">
                     <Badge
                       variant="primary"
                       className={`text-xs px-2 py-1 ${getAvailabilityColor(roofer.availability)}`}
@@ -233,7 +182,7 @@ export const Roofers: React.FC<RoofersProps> = ({ onAddRoofer, onEditRoofer }) =
                       {roofer.availability === 'full-time' ? 'Full-time' : 'Part-time'}
                     </Badge>
                   </div>
-                  <div className="flex gap-1 flex-wrap">
+                  <div className="flex-1 flex gap-1 flex-wrap">
                     {roofer.certifications.map((cert, index) => (
                       <Badge
                         key={index}
@@ -244,9 +193,16 @@ export const Roofers: React.FC<RoofersProps> = ({ onAddRoofer, onEditRoofer }) =
                       </Badge>
                     ))}
                   </div>
-                  <div className="text-right text-gray-900">
-                    {roofer.contactCount}
-                  </div>
+                  <div className="flex-1 text-right text-gray-900">{roofer.contactCount}</div>
+                  {onDeleteRoofer && (
+                    <Button
+                      variant="outline"
+                      className="ml-2 text-red-600 border-red-200 hover:bg-red-50"
+                      onClick={() => onDeleteRoofer(roofer.id)}
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </div>
               ))}
             </div>

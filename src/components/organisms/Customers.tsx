@@ -18,6 +18,7 @@ export interface CustomerData {
 }
 
 interface CustomersProps {
+  customers: CustomerData[];
   onAddCustomer: () => void;
   onEditCustomer: (customer: CustomerData) => void;
 }
@@ -37,70 +38,7 @@ const getStatusColor = (status: string) => {
     : 'bg-gray-100 text-gray-800 border-gray-200';
 };
 
-const customersData: CustomerData[] = [
-  {
-    id: 1,
-    fullName: 'John Smith',
-    email: 'john.smith@email.com',
-    phone: '(555) 123-4567',
-    address: '123 Main Street, Springfield, IL 62701',
-    customerType: 'residential',
-    status: 'active',
-    jobCount: 3,
-    lastContact: '2024-01-15',
-    assignedRoofer: 'Michael Rodriguez'
-  },
-  {
-    id: 2,
-    fullName: 'ABC Corporation',
-    email: 'contact@abccorp.com',
-    phone: '(555) 987-6543',
-    address: '456 Business Ave, Chicago, IL 60601',
-    customerType: 'commercial',
-    status: 'active',
-    jobCount: 8,
-    lastContact: '2024-01-20',
-    assignedRoofer: 'Sarah Johnson'
-  },
-  {
-    id: 3,
-    fullName: 'Maria Garcia',
-    email: 'maria.garcia@email.com',
-    phone: '(555) 234-5678',
-    address: '789 Oak Drive, Peoria, IL 61602',
-    customerType: 'residential',
-    status: 'active',
-    jobCount: 1,
-    lastContact: '2024-01-10',
-    assignedRoofer: 'David Thompson'
-  },
-  {
-    id: 4,
-    fullName: 'Tech Solutions Inc.',
-    email: 'info@techsolutions.com',
-    phone: '(555) 345-6789',
-    address: '321 Corporate Blvd, Rockford, IL 61101',
-    customerType: 'commercial',
-    status: 'inactive',
-    jobCount: 0,
-    lastContact: '2023-12-05',
-    assignedRoofer: null
-  },
-  {
-    id: 5,
-    fullName: 'Robert Johnson',
-    email: 'rob.johnson@email.com',
-    phone: '(555) 456-7890',
-    address: '654 Pine Street, Decatur, IL 62521',
-    customerType: 'residential',
-    status: 'active',
-    jobCount: 5,
-    lastContact: '2024-01-18',
-    assignedRoofer: 'Jennifer Martinez'
-  }
-];
-
-export const Customers: React.FC<CustomersProps> = ({ onAddCustomer, onEditCustomer }) => {
+export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, onEditCustomer }) => {
   const [sortField, setSortField] = useState<SortField>('fullName');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
@@ -113,7 +51,7 @@ export const Customers: React.FC<CustomersProps> = ({ onAddCustomer, onEditCusto
     }
   };
 
-  const sortedCustomers = [...customersData].sort((a, b) => {
+  const sortedCustomers = [...customers].sort((a, b) => {
     let aValue: string | number;
     let bValue: string | number;
 
@@ -200,53 +138,47 @@ export const Customers: React.FC<CustomersProps> = ({ onAddCustomer, onEditCusto
               Add Customer
             </Button>
           </div>
-          {/* Customer Table */}
-          <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead onClick={() => handleSort('fullName')} className="cursor-pointer">Name{<SortIcon field="fullName" />}</TableHead>
-                  <TableHead onClick={() => handleSort('email')} className="cursor-pointer">Email{<SortIcon field="email" />}</TableHead>
-                  <TableHead onClick={() => handleSort('phone')} className="cursor-pointer">Phone{<SortIcon field="phone" />}</TableHead>
-                  <TableHead onClick={() => handleSort('address')} className="cursor-pointer">Address{<SortIcon field="address" />}</TableHead>
-                  <TableHead onClick={() => handleSort('customerType')} className="cursor-pointer">Type{<SortIcon field="customerType" />}</TableHead>
-                  <TableHead onClick={() => handleSort('status')} className="cursor-pointer">Status{<SortIcon field="status" />}</TableHead>
-                  <TableHead onClick={() => handleSort('jobCount')} className="cursor-pointer">Jobs{<SortIcon field="jobCount" />}</TableHead>
-                  <TableHead onClick={() => handleSort('lastContact')} className="cursor-pointer">Last Contact{<SortIcon field="lastContact" />}</TableHead>
-                  <TableHead>Assigned Roofer</TableHead>
-                  <TableHead>Actions</TableHead>
+          {/* Table Body */}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead onClick={() => handleSort('fullName')}>Full Name<SortIcon field="fullName" /></TableHead>
+                <TableHead onClick={() => handleSort('email')}>Email<SortIcon field="email" /></TableHead>
+                <TableHead onClick={() => handleSort('phone')}>Phone<SortIcon field="phone" /></TableHead>
+                <TableHead onClick={() => handleSort('address')}>Address<SortIcon field="address" /></TableHead>
+                <TableHead onClick={() => handleSort('customerType')}>Type<SortIcon field="customerType" /></TableHead>
+                <TableHead onClick={() => handleSort('status')}>Status<SortIcon field="status" /></TableHead>
+                <TableHead onClick={() => handleSort('jobCount')}>Jobs<SortIcon field="jobCount" /></TableHead>
+                <TableHead onClick={() => handleSort('lastContact')}>Last Contact<SortIcon field="lastContact" /></TableHead>
+                <TableHead>Assigned Roofer</TableHead>
+                <TableHead>Edit</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {sortedCustomers.map((customer) => (
+                <TableRow key={customer.id}>
+                  <TableCell>{customer.fullName}</TableCell>
+                  <TableCell>{customer.email}</TableCell>
+                  <TableCell>{customer.phone}</TableCell>
+                  <TableCell>{customer.address}</TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 rounded ${getCustomerTypeColor(customer.customerType)}`}>{customer.customerType.charAt(0).toUpperCase() + customer.customerType.slice(1)}</span>
+                  </TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 rounded ${getStatusColor(customer.status)}`}>{customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}</span>
+                  </TableCell>
+                  <TableCell>{customer.jobCount}</TableCell>
+                  <TableCell>{customer.lastContact}</TableCell>
+                  <TableCell>{customer.assignedRoofer || '-'}</TableCell>
+                  <TableCell>
+                    <Button variant="outline" size="sm" onClick={() => onEditCustomer(customer)}>
+                      Edit
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {sortedCustomers.map((customer) => (
-                  <TableRow key={customer.id}>
-                    <TableCell>{customer.fullName}</TableCell>
-                    <TableCell>{customer.email}</TableCell>
-                    <TableCell>{customer.phone}</TableCell>
-                    <TableCell>{customer.address}</TableCell>
-                    <TableCell>
-                      <span className={`inline-block px-2 py-1 rounded border text-xs font-medium ${getCustomerTypeColor(customer.customerType)}`}>
-                        {customer.customerType.charAt(0).toUpperCase() + customer.customerType.slice(1)}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <span className={`inline-block px-2 py-1 rounded border text-xs font-medium ${getStatusColor(customer.status)}`}>
-                        {customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}
-                      </span>
-                    </TableCell>
-                    <TableCell>{customer.jobCount}</TableCell>
-                    <TableCell>{customer.lastContact}</TableCell>
-                    <TableCell>{customer.assignedRoofer || '-'}</TableCell>
-                    <TableCell>
-                      <Button variant="outline" size="sm" onClick={() => onEditCustomer(customer)}>
-                        Edit
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </main>
     </div>

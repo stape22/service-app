@@ -2,16 +2,30 @@ import React, { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../atoms/Tabs';
 import { Calendar, Layout, Table } from 'lucide-react';
-// TODO: Replace with atomic/organism KanbanBoard, JobsCalendar, JobsTable implementations. See dev-log.md for rationale.
-// import { JobsCalendar } from '../../../Figma Design/components/JobsCalendar';
-// import { KanbanBoard } from '../../../Figma Design/components/KanbanBoard';
-// import { JobsTable } from '../../../Figma Design/components/JobsTable';
+import { JobsCalendar } from '../organisms/JobsCalendar';
+import { JobsTable } from '../molecules/JobsTable';
+
+// Local jobs data for demonstration (should be replaced with real data source)
+const jobsData = [
+  { id: '#318', date: 'June 4, 2025', jobType: 'Install', status: 'scheduled', roofer: 'Mike Johnson', address: '1234 Oak Street', customer: 'John Smith' },
+  { id: '#319', date: 'June 5, 2025', jobType: 'Repair', status: 'to-schedule', roofer: 'Sarah Williams', address: '567 Pine Avenue', customer: 'Emily Davis' },
+  { id: '#320', date: 'June 5, 2025', jobType: 'Estimate', status: 'completed', roofer: 'David Chen', address: '890 Maple Drive', customer: 'Robert Johnson' },
+  { id: '#321', date: 'June 6, 2025', jobType: 'Install', status: 'in-progress', roofer: 'James Wilson', address: '123 Elm Court', customer: 'Patricia Brown' },
+  { id: '#322', date: 'June 7, 2025', jobType: 'Repair', status: 'scheduled', roofer: 'Lisa Martinez', address: '456 Cedar Lane', customer: 'Michael Wilson' },
+  { id: '#323', date: 'June 8, 2025', jobType: 'Cleaning', status: 'to-schedule', roofer: 'Thomas Anderson', address: '789 Birch Street', customer: 'Jennifer Taylor' },
+];
+
+const jobsForCalendar = jobsData.map(j => ({
+  id: j.id,
+  title: j.jobType,
+  type: (j.jobType.toLowerCase() as 'estimate' | 'install' | 'repair' | 'cleaning'),
+  date: new Date(j.date),
+}));
 
 export const DashboardPage: React.FC = () => {
   const [activeView, setActiveView] = useState<'calendar' | 'kanban' | 'table'>('calendar');
   const [currentPage, setCurrentPage] = useState('dashboard');
 
-  // Navigation handler for DashboardLayout
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
   };
@@ -20,7 +34,6 @@ export const DashboardPage: React.FC = () => {
     <DashboardLayout
       currentPage={currentPage}
       onPageChange={handlePageChange}
-      // Removed isChatOpen, onChatToggle, onChatClose props as they are not defined in DashboardLayoutProps
     >
       <main className="px-6 lg:px-8 py-8">
         <div className="max-w-full mx-auto">
@@ -49,18 +62,14 @@ export const DashboardPage: React.FC = () => {
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
             <Tabs value={activeView} className="w-full">
               <TabsContent value="calendar" className="m-0">
-                {/* JobsCalendar component will be replaced with atomic/organism */}
-                <div>Calendar View Placeholder</div>
+                <JobsCalendar jobs={jobsForCalendar} />
               </TabsContent>
-              
               <TabsContent value="kanban" className="m-0">
-                {/* KanbanBoard component will be replaced with atomic/organism */}
-                <div>Kanban View Placeholder</div>
+                {/* KanbanBoard placeholder */}
+                <div className="p-8 text-center text-gray-500">Kanban view coming soon.</div>
               </TabsContent>
-              
               <TabsContent value="table" className="m-0">
-                {/* JobsTable component will be replaced with atomic/organism */}
-                <div>Table View Placeholder</div>
+                <JobsTable jobs={jobsData} />
               </TabsContent>
             </Tabs>
           </div>

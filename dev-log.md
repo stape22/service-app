@@ -778,3 +778,42 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
   - No code changes required for cn utility or its imports.
 - **Context:**
   - The original module resolution issue is resolved. The remaining test failure is a limitation of react-day-picker in the test environment, not a code or import bug.
+
+## [2024-07-16T12:00:00Z] [AI Agent]
+
+### Delete Roofer Feature Implementation
+- **Files:** src/components/pages/RoofersPage.tsx, src/components/organisms/Roofers.tsx, src/components/molecules/EditRooferForm.tsx, src/components/molecules/EditRooferForm.test.tsx, tasks.md
+- **Summary:**
+  - Refactored roofers list to be managed in page state for full CRUD support.
+  - Implemented delete roofer functionality, updating UI and state.
+  - Updated props and types for atomic/component compliance.
+  - Added/extended unit tests for delete flow.
+  - Marked 'Delete roofer' as complete in tasks.md.
+  - Fulfills /tasks.md requirement for 'Delete roofer' with audit trail and test coverage.
+
+## [2024-07-16T13:00:00Z] [AI Agent]
+
+### Add New Customer Feature Implementation
+- **Files:** src/components/pages/CustomersPage.tsx, src/components/organisms/Customers.tsx, src/components/molecules/AddCustomerForm.tsx, src/components/molecules/AddCustomerForm.test.tsx, src/components/molecules/index.ts, tasks.md
+- **Summary:**
+  - Created AddCustomerForm molecule and unit test per Figma reference and atomic conventions.
+  - Refactored CustomersPage and Customers organism to manage customer list in state and support adding new customers via modal.
+  - Updated molecules index for import hygiene.
+  - Marked 'Add new customer' as complete in tasks.md.
+  - Fulfills /tasks.md requirement for 'Add new customer' with audit trail and test coverage.
+
+## [2024-07-16T14:00:00Z] [AI Agent]
+
+### Edit Customer Feature Implementation
+- **Files:** src/components/pages/CustomersPage.tsx, src/components/organisms/Customers.tsx, src/components/molecules/EditCustomerForm.tsx, src/components/molecules/EditCustomerForm.test.tsx, tasks.md
+- **Summary:**
+  - Created EditCustomerForm molecule and unit test per Figma reference and atomic conventions.
+  - Integrated edit modal and state management in CustomersPage and Customers organism.
+  - Users can now edit and delete customers via modal, with all changes reflected in state.
+  - Marked 'Edit customer' as complete in tasks.md.
+  - Fulfills /tasks.md requirement for 'Edit customer' with audit trail and test coverage.
+
+## [2024-06-11T00:00:00Z] Claude
+**Files/Scope:** DashboardPage.tsx, JobsPage.tsx, JobsCalendar.tsx, JobsTable.tsx, KanbanBoard.tsx
+**Summary:**
+Refactored DashboardPage to display all job views (calendar, table, kanban placeholder) using atomic/organism components and local jobs data. Refactored JobsPage to remove all job views, keeping only add, edit, and delete job management features and modals. Updated JobsTable to make edit/delete actions optional for view-only use in Dashboard. Marked related subtasks as complete in tasks.md.

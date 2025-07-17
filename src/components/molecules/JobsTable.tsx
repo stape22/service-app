@@ -127,15 +127,32 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jo
               <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.address}</TableCell>
               <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.customer}</TableCell>
               <TableCell>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  aria-label={`Delete job ${job.id}`}
-                  onClick={e => { e.stopPropagation(); onDeleteJob?.(job.id); }}
-                  className="opacity-80 group-hover:opacity-100"
-                >
-                  🗑
-                </Button>
+                {(onEditJob || onDeleteJob) && (
+                  <div className="flex gap-2">
+                    {onEditJob && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        aria-label={`Edit job ${job.id}`}
+                        onClick={e => { e.stopPropagation(); onEditJob(job.id); }}
+                        className="opacity-80 group-hover:opacity-100"
+                      >
+                        ✏️
+                      </Button>
+                    )}
+                    {onDeleteJob && (
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        aria-label={`Delete job ${job.id}`}
+                        onClick={e => { e.stopPropagation(); onDeleteJob(job.id); }}
+                        className="opacity-80 group-hover:opacity-100"
+                      >
+                        🗑
+                      </Button>
+                    )}
+                  </div>
+                )}
               </TableCell>
             </TableRow>
           ))}

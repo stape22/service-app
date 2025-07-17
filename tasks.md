@@ -120,15 +120,14 @@
 
 * [x] View roofer list
 * [x] Add new roofer
-* [x] Edit roofer
-* [ ] Delete roofer
+* [x] Delete roofer
 
 ### Customers
 
 * [x] View customer list
-* [ ] Add new customer
-* [ ] Edit customer
-* [ ] Delete customer
+* [x] Add new customer
+* [x] Edit customer
+* [x] Delete customer
 
 ## 📊 UX Polish
 
@@ -207,12 +206,12 @@ Ensure the Dashboard is view-only (shows jobs in calendar, table, kanban, etc.) 
 ### Tasks & Subtasks
 
 1. **Audit Current Implementation**
-   - [ ] Review Dashboard page for job views (calendar, table, kanban).
-   - [ ] Review Jobs page for job views and job management features.
+   - [x] Review Dashboard page for job views (calendar, table, kanban).
+   - [x] Review Jobs page for job views and job management features.
 
 2. **Refactor Pages**
-   - [ ] Move all job view components (calendar, table, kanban) to Dashboard.
-   - [ ] Ensure Jobs page contains only job creation and management features (add, edit, delete).
+   - [x] Move all job view components (calendar, table, kanban) to Dashboard.
+   - [x] Ensure Jobs page contains only job creation and management features (add, edit, delete).
 
 3. **Update Navigation**
    - [ ] Update navigation labels and routes to reflect new structure.

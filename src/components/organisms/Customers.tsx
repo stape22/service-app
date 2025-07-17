@@ -148,7 +148,7 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                     onClick={() => handleSort('fullName')}
                   >
                     <div className="flex items-center justify-start">
-                      Customer Name
+                      Full Name
                       <SortIcon field="fullName" />
                     </div>
                   </TableHead>
@@ -157,7 +157,7 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                     onClick={() => handleSort('email')}
                   >
                     <div className="flex items-center justify-start">
-                      Email Address
+                      Email
                       <SortIcon field="email" />
                     </div>
                   </TableHead>
@@ -166,7 +166,7 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                     onClick={() => handleSort('phone')}
                   >
                     <div className="flex items-center justify-start">
-                      Phone Number
+                      Phone
                       <SortIcon field="phone" />
                     </div>
                   </TableHead>
@@ -197,18 +197,12 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                       <SortIcon field="status" />
                     </div>
                   </TableHead>
-                  <TableHead className="font-medium text-gray-700">
-                    <div className="flex items-center justify-start">
-                      Assigned Roofer
-                      <span className="w-4 h-4 ml-2"></span>
-                    </div>
-                  </TableHead>
                   <TableHead 
                     className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
                     onClick={() => handleSort('jobCount')}
                   >
-                    <div className="flex items-center justify-end">
-                      # of Jobs
+                    <div className="flex items-center justify-start">
+                      Jobs
                       <SortIcon field="jobCount" />
                     </div>
                   </TableHead>
@@ -219,6 +213,18 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                     <div className="flex items-center justify-start">
                       Last Contact
                       <SortIcon field="lastContact" />
+                    </div>
+                  </TableHead>
+                  <TableHead className="font-medium text-gray-700">
+                    <div className="flex items-center justify-start">
+                      Assigned Roofer
+                      <span className="w-4 h-4 ml-2"></span>
+                    </div>
+                  </TableHead>
+                  <TableHead className="font-medium text-gray-700">
+                    <div className="flex items-center justify-center">
+                      Edit
+                      <span className="w-4 h-4 ml-2"></span>
                     </div>
                   </TableHead>
                 </TableRow>
@@ -253,6 +259,12 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                         {customer.status === 'active' ? 'Active' : 'Inactive'}
                       </Badge>
                     </TableCell>
+                    <TableCell className="text-gray-900">
+                      {customer.jobCount}
+                    </TableCell>
+                    <TableCell className="text-gray-900">
+                      {new Date(customer.lastContact).toLocaleDateString()}
+                    </TableCell>
                     <TableCell>
                       {customer.assignedRoofer ? (
                         <Badge
@@ -265,11 +277,15 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
                         <span className="text-gray-400 text-sm">No roofer assigned</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-right text-gray-900">
-                      {customer.jobCount}
-                    </TableCell>
-                    <TableCell className="text-gray-900">
-                      {new Date(customer.lastContact).toLocaleDateString()}
+                    <TableCell className="text-center">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-xs px-2 py-1"
+                        onClick={() => onEditCustomer(customer)}
+                      >
+                        Edit
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -848,3 +848,47 @@ Refactored DashboardPage to display all job views (calendar, table, kanban place
   - Maintains atomic design principles and accessibility standards
   - Ensures visual consistency with design system
   - Provides comprehensive test coverage for all new features
+
+## [2024-12-19T15:30:00Z] [AI: Cursor Agent]
+
+### Customers Page Layout Update - Figma Design Implementation
+- **Files:** src/components/organisms/Customers.tsx
+- **Summary:**
+  - Updated Customers organism to match Figma design specifications exactly:
+    - Reordered table columns to match Figma: Full Name, Email, Phone, Address, Type, Status, Jobs, Last Contact, Assigned Roofer, Edit
+    - Updated column labels to match Figma: "Customer Name" → "Full Name", "Email Address" → "Email", "Phone Number" → "Phone", "# of Jobs" → "Jobs"
+    - Added dedicated "Edit" column with centered Edit button for each row
+    - Moved "Jobs" and "Last Contact" columns before "Assigned Roofer" to match Figma layout
+    - Maintained all existing functionality including sorting, badges, and interactive elements
+    - Preserved responsive design and accessibility features
+  - Design tokens and styling maintained:
+    - Badge colors: blue/purple for customer types, green/gray for status, orange for assigned roofers
+    - Typography: text-gray-900 for data, text-gray-700 for headers
+    - Spacing: px-4 py-2 for cells, proper hover states
+    - Interactive elements: sort indicators, clickable customer names, Edit buttons
+- **Context:**
+  - Fulfills requirement to update Customers page layout and styles to fully match Figma design
+  - Maintains atomic design principles and component structure
+  - Ensures visual consistency with design system
+  - Preserves all existing functionality while matching exact Figma specifications
+
+## [2024-07-16T-EOD] [AI: Cursor Agent]
+
+### Jobs Page Redesign – Figma Design Alignment
+- **Files:** src/components/pages/JobsPage.tsx, src/components/molecules/JobsTable.tsx
+- **Summary:**
+  - Rebuilt the Jobs page to visually and structurally match the Figma design.
+  - Added a page header with title and description per Figma.
+  - Integrated a comprehensive jobs table with columns: Job Number, Customer, Assigned Roofer, Job Type, Status, Priority, Scheduled Date, Job Location, Est. Cost, and Actions.
+  - Implemented sorting for all sortable columns.
+  - Used Tailwind CSS utility classes to match Figma tokens for spacing, color, border radius, and typography.
+  - Ensured responsive layout and consistent design system usage.
+  - Preserved "+ Add Job" button and job management modals.
+- **Design Tokens Used:**
+  - Colors: blue-100/200/600/700/800, orange-100/200/800, indigo-100/200/800, purple-100/200/800, yellow-100/200/800, green-100/200/800, red-100/200/800, gray-50/100/200/400/600/700/800/900
+  - Spacing: px-6, lg:px-8, py-8, mb-8, max-w-full, rounded-lg
+  - Typography: text-xs, text-sm, text-2xl, font-semibold
+  - Layout: flex, items-center, justify-between, overflow-x-auto, border, border-gray-200
+- **Context:**
+  - Fulfills the requirement to match the Jobs page to the Figma reference, per README.md, rules.md, and tasks.md.
+  - All changes logged for audit and future reference.

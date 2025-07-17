@@ -83,6 +83,7 @@ export const CustomersPage: React.FC = () => {
   const [showAddCustomer, setShowAddCustomer] = useState(false);
   const [showEditCustomer, setShowEditCustomer] = useState(false);
   const [customerToEdit, setCustomerToEdit] = useState<CustomerData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePageChange = (page: string) => setCurrentPage(page);
   const handleAddCustomer = () => setShowAddCustomer(true);
@@ -132,7 +133,12 @@ export const CustomersPage: React.FC = () => {
 
   return (
     <DashboardLayout currentPage={currentPage} onPageChange={handlePageChange}>
-      <Customers customers={customers} onAddCustomer={handleAddCustomer} onEditCustomer={handleEditCustomer} />
+      <Customers 
+        customers={customers} 
+        onAddCustomer={handleAddCustomer} 
+        onEditCustomer={handleEditCustomer}
+        isLoading={isLoading}
+      />
       <Modal isOpen={showAddCustomer} onClose={() => setShowAddCustomer(false)} title="Add Customer">
         <AddCustomerForm
           onBack={() => setShowAddCustomer(false)}

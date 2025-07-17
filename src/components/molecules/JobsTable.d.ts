@@ -7,6 +7,8 @@ export interface JobData {
     roofer: string;
     address: string;
     customer: string;
+    priority?: 'low' | 'medium' | 'high' | 'urgent';
+    estimatedCost?: number;
 }
 interface JobsTableProps {
     onEditJob?: (jobId: string) => void;

@@ -5,6 +5,7 @@ import AddJobForm from '../molecules/AddJobForm';
 import { Button } from '../atoms/Button';
 import { Modal } from '../atoms/Modal';
 import { ConfirmDialog } from '../atoms/ConfirmDialog';
+import { JobsTable } from '../molecules/JobsTable';
 
 function jobDataToInitialJob(job: JobData) {
   return {
@@ -93,12 +94,38 @@ export const JobsPage: React.FC = () => {
       currentPage={currentPage}
       onPageChange={handlePageChange}
     >
-      <div className="flex justify-between items-center mb-4">
-        <Button variant="default" onClick={() => setShowAddJob(true)} aria-label="Add Job">
-          + Add Job
-        </Button>
+      <div className="bg-gray-50 min-h-screen">
+        <main className="px-6 lg:px-8 py-8">
+          <div className="max-w-full mx-auto">
+            {/* Page Header */}
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h1 className="text-2xl font-semibold text-gray-900">Jobs</h1>
+                <p className="text-gray-600 mt-1">Manage all roofing jobs and their progress</p>
+              </div>
+              <Button 
+                variant="default"
+                onClick={() => setShowAddJob(true)}
+                aria-label="Add Job"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                + Add Job
+              </Button>
+            </div>
+
+            {/* Jobs Table */}
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <JobsTable 
+                jobs={jobs}
+                onEditJob={handleEditJob}
+                onDeleteJob={handleDeleteJob}
+              />
+            </div>
+          </div>
+        </main>
       </div>
-      {/* Management modals only, no job views */}
+
+      {/* Management modals */}
       <Modal isOpen={showAddJob} onClose={() => setShowAddJob(false)} title="Add Job">
         <AddJobForm onBack={() => setShowAddJob(false)} />
       </Modal>

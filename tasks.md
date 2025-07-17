@@ -224,3 +224,6 @@ Ensure the Dashboard is view-only (shows jobs in calendar, table, kanban, etc.) 
    - [ ] Update README.md with new page purposes and user flow.
    - [ ] Add dev-log.md entry for this change.
    - [ ] Update tasks.md with this checklist.
+
+- [x] Rebuild the Jobs page to match Figma (header, table, sorting, tokens, responsive)
+- [x] Validate layout, run lint/build, and log changes in dev-log.md

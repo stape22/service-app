@@ -11,6 +11,8 @@ export interface JobData {
   roofer: string;
   address: string;
   customer: string;
+  priority?: 'low' | 'medium' | 'high' | 'urgent';
+  estimatedCost?: number;
 }
 
 interface JobsTableProps {
@@ -20,22 +22,57 @@ interface JobsTableProps {
 }
 
 const jobsData: JobData[] = [
-  { id: '#318', date: 'June 4, 2025', jobType: 'Install', status: 'scheduled', roofer: 'Mike Johnson', address: '1234 Oak Street', customer: 'John Smith' },
-  { id: '#319', date: 'June 5, 2025', jobType: 'Repair', status: 'to-schedule', roofer: 'Sarah Williams', address: '567 Pine Avenue', customer: 'Emily Davis' },
-  { id: '#320', date: 'June 5, 2025', jobType: 'Estimate', status: 'completed', roofer: 'David Chen', address: '890 Maple Drive', customer: 'Robert Johnson' },
-  { id: '#321', date: 'June 6, 2025', jobType: 'Install', status: 'in-progress', roofer: 'James Wilson', address: '123 Elm Court', customer: 'Patricia Brown' },
-  { id: '#322', date: 'June 7, 2025', jobType: 'Repair', status: 'scheduled', roofer: 'Lisa Martinez', address: '456 Cedar Lane', customer: 'Michael Wilson' },
-  { id: '#323', date: 'June 8, 2025', jobType: 'Cleaning', status: 'to-schedule', roofer: 'Thomas Anderson', address: '789 Birch Street', customer: 'Jennifer Taylor' },
+  { id: '#318', date: 'June 4, 2025', jobType: 'Install', status: 'scheduled', roofer: 'Mike Johnson', address: '1234 Oak Street', customer: 'John Smith', priority: 'high', estimatedCost: 15000 },
+  { id: '#319', date: 'June 5, 2025', jobType: 'Repair', status: 'to-schedule', roofer: 'Sarah Williams', address: '567 Pine Avenue', customer: 'Emily Davis', priority: 'medium', estimatedCost: 2500 },
+  { id: '#320', date: 'June 5, 2025', jobType: 'Estimate', status: 'completed', roofer: 'David Chen', address: '890 Maple Drive', customer: 'Robert Johnson', priority: 'low', estimatedCost: 300 },
+  { id: '#321', date: 'June 6, 2025', jobType: 'Install', status: 'in-progress', roofer: 'James Wilson', address: '123 Elm Court', customer: 'Patricia Brown', priority: 'high', estimatedCost: 18000 },
+  { id: '#322', date: 'June 7, 2025', jobType: 'Repair', status: 'scheduled', roofer: 'Lisa Martinez', address: '456 Cedar Lane', customer: 'Michael Wilson', priority: 'urgent', estimatedCost: 4200 },
+  { id: '#323', date: 'June 8, 2025', jobType: 'Cleaning', status: 'to-schedule', roofer: 'Thomas Anderson', address: '789 Birch Street', customer: 'Jennifer Taylor', priority: 'medium', estimatedCost: 800 },
 ];
 
 type SortField = keyof JobData;
 type SortDirection = 'asc' | 'desc';
 
-const statusColors: Record<JobData['status'], string> = {
-  'scheduled': 'bg-blue-100 text-blue-800 border-blue-200',
-  'to-schedule': 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  'completed': 'bg-green-100 text-green-800 border-green-200',
-  'in-progress': 'bg-orange-100 text-orange-800 border-orange-200',
+const getJobTypeColor = (type: string) => {
+  const colors = {
+    'repair': 'bg-blue-100 text-blue-800 border-blue-200',
+    'install': 'bg-orange-100 text-orange-800 border-orange-200',
+    'estimate': 'bg-indigo-100 text-indigo-800 border-indigo-200',
+    'cleaning': 'bg-purple-100 text-purple-800 border-purple-200'
+  };
+  return colors[type.toLowerCase() as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
+};
+
+const getStatusColor = (status: string) => {
+  const colors = {
+    'scheduled': 'bg-blue-100 text-blue-800 border-blue-200',
+    'to-schedule': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    'completed': 'bg-green-100 text-green-800 border-green-200',
+    'in-progress': 'bg-orange-100 text-orange-800 border-orange-200'
+  };
+  return colors[status as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
+};
+
+const getPriorityColor = (priority: string) => {
+  const colors = {
+    'low': 'bg-gray-100 text-gray-800 border-gray-200',
+    'medium': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    'high': 'bg-orange-100 text-orange-800 border-orange-200',
+    'urgent': 'bg-red-100 text-red-800 border-red-200'
+  };
+  return colors[priority as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
+};
+
+const formatJobType = (type: string) => {
+  return type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ');
+};
+
+const formatStatus = (status: string) => {
+  return status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ');
+};
+
+const formatPriority = (priority: string) => {
+  return priority.charAt(0).toUpperCase() + priority.slice(1);
 };
 
 export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jobs }) => {
@@ -54,6 +91,7 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jo
   const sortedJobs = [...(jobs || jobsData)].sort((a, b) => {
     let aValue: string | number = a[sortField];
     let bValue: string | number = b[sortField];
+    
     if (sortField === 'id') {
       aValue = parseInt(a.id.replace('#', ''));
       bValue = parseInt(b.id.replace('#', ''));
@@ -62,6 +100,16 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jo
       aValue = new Date(a.date).getTime();
       bValue = new Date(b.date).getTime();
     }
+    if (sortField === 'priority') {
+      const priorityOrder = { 'low': 1, 'medium': 2, 'high': 3, 'urgent': 4 };
+      aValue = priorityOrder[a.priority || 'medium'];
+      bValue = priorityOrder[b.priority || 'medium'];
+    }
+    if (sortField === 'estimatedCost') {
+      aValue = a.estimatedCost || 0;
+      bValue = b.estimatedCost || 0;
+    }
+    
     if (typeof aValue === 'string' && typeof bValue === 'string') {
       return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     } else {
@@ -87,27 +135,81 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jo
     <div className="overflow-x-auto">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('id')}>
-              <div className="flex items-center">Job #<SortIcon field="id" /></div>
+          <TableRow className="bg-gray-50">
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('id')}
+            >
+              <div className="flex items-center justify-start">
+                Job Number
+                <SortIcon field="id" />
+              </div>
             </TableHead>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('date')}>
-              <div className="flex items-center">Date<SortIcon field="date" /></div>
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('customer')}
+            >
+              <div className="flex items-center justify-start">
+                Customer
+                <SortIcon field="customer" />
+              </div>
             </TableHead>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('jobType')}>
-              <div className="flex items-center">Job Type<SortIcon field="jobType" /></div>
+            <TableHead className="font-medium text-gray-700">
+              <div className="flex items-center justify-start">
+                Assigned Roofer
+                <span className="w-4 h-4 ml-2"></span>
+              </div>
             </TableHead>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('status')}>
-              <div className="flex items-center">Status<SortIcon field="status" /></div>
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('jobType')}
+            >
+              <div className="flex items-center justify-start">
+                Job Type
+                <SortIcon field="jobType" />
+              </div>
             </TableHead>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('roofer')}>
-              <div className="flex items-center">Roofer<SortIcon field="roofer" /></div>
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('status')}
+            >
+              <div className="flex items-center justify-start">
+                Status
+                <SortIcon field="status" />
+              </div>
             </TableHead>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('address')}>
-              <div className="flex items-center">Address<SortIcon field="address" /></div>
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('priority')}
+            >
+              <div className="flex items-center justify-start">
+                Priority
+                <SortIcon field="priority" />
+              </div>
             </TableHead>
-            <TableHead className="cursor-pointer" onClick={() => handleSort('customer')}>
-              <div className="flex items-center">Customer<SortIcon field="customer" /></div>
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('date')}
+            >
+              <div className="flex items-center justify-start">
+                Scheduled Date
+                <SortIcon field="date" />
+              </div>
+            </TableHead>
+            <TableHead className="font-medium text-gray-700">
+              <div className="flex items-center justify-start">
+                Job Location
+                <span className="w-4 h-4 ml-2"></span>
+              </div>
+            </TableHead>
+            <TableHead 
+              className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+              onClick={() => handleSort('estimatedCost')}
+            >
+              <div className="flex items-center justify-end">
+                Est. Cost
+                <SortIcon field="estimatedCost" />
+              </div>
             </TableHead>
             <TableHead>
               <span className="sr-only">Actions</span>
@@ -116,16 +218,61 @@ export const JobsTable: React.FC<JobsTableProps> = ({ onEditJob, onDeleteJob, jo
         </TableHeader>
         <TableBody>
           {sortedJobs.map((job) => (
-            <TableRow key={job.id} className="hover:bg-blue-50 group">
-              <TableCell className="text-right font-mono cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.id}</TableCell>
-              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.date}</TableCell>
-              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.jobType}</TableCell>
-              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>
-                <Badge variant="secondary" className={`text-xs px-2 py-1 border ${statusColors[job.status]}`}>{job.status.replace('-', ' ')}</Badge>
+            <TableRow key={job.id} className="hover:bg-gray-50 group">
+              <TableCell>
+                <button 
+                  className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                  onClick={() => onEditJob?.(job.id)}
+                >
+                  {job.id}
+                </button>
               </TableCell>
-              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.roofer}</TableCell>
-              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.address}</TableCell>
-              <TableCell className="cursor-pointer" onClick={() => onEditJob?.(job.id)}>{job.customer}</TableCell>
+              <TableCell className="text-gray-900">{job.customer}</TableCell>
+              <TableCell>
+                {job.roofer ? (
+                  <Badge
+                    variant="outline"
+                    className="text-xs px-2 py-1 bg-orange-100 text-orange-800 border-orange-200"
+                  >
+                    {job.roofer}
+                  </Badge>
+                ) : (
+                  <span className="text-gray-400 text-sm">No roofer assigned</span>
+                )}
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant="outline"
+                  className={`text-xs px-2 py-1 ${getJobTypeColor(job.jobType)}`}
+                >
+                  {formatJobType(job.jobType)}
+                </Badge>
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant="outline"
+                  className={`text-xs px-2 py-1 ${getStatusColor(job.status)}`}
+                >
+                  {formatStatus(job.status)}
+                </Badge>
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant="outline"
+                  className={`text-xs px-2 py-1 ${getPriorityColor(job.priority || 'medium')}`}
+                >
+                  {formatPriority(job.priority || 'medium')}
+                </Badge>
+              </TableCell>
+              <TableCell className="text-gray-900">
+                {new Date(job.date).toLocaleDateString()}
+              </TableCell>
+              <TableCell className="text-gray-900 max-w-xs truncate">
+                {job.address}
+              </TableCell>
+              <TableCell className="text-right text-gray-900">
+                ${(job.estimatedCost || 0).toLocaleString()}
+              </TableCell>
               <TableCell>
                 {(onEditJob || onDeleteJob) && (
                   <div className="flex gap-2">

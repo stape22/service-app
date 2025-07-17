@@ -80,6 +80,7 @@ export const CustomersPage = () => {
     const [showAddCustomer, setShowAddCustomer] = useState(false);
     const [showEditCustomer, setShowEditCustomer] = useState(false);
     const [customerToEdit, setCustomerToEdit] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const handlePageChange = (page) => setCurrentPage(page);
     const handleAddCustomer = () => setShowAddCustomer(true);
     const handleAddCustomerSubmit = (data) => {
@@ -123,5 +124,5 @@ export const CustomersPage = () => {
         setShowEditCustomer(false);
         setCustomerToEdit(null);
     };
-    return (_jsxs(DashboardLayout, { currentPage: currentPage, onPageChange: handlePageChange, children: [_jsx(Customers, { customers: customers, onAddCustomer: handleAddCustomer, onEditCustomer: handleEditCustomer }), _jsx(Modal, { isOpen: showAddCustomer, onClose: () => setShowAddCustomer(false), title: "Add Customer", children: _jsx(AddCustomerForm, { onBack: () => setShowAddCustomer(false), onSubmit: handleAddCustomerSubmit, availableRoofers: availableRoofers }) }), _jsx(Modal, { isOpen: showEditCustomer, onClose: () => setShowEditCustomer(false), title: "Edit Customer", children: customerToEdit && (_jsx(EditCustomerForm, { customer: customerToEdit, onBack: () => setShowEditCustomer(false), onSubmit: handleEditCustomerSubmit, onDelete: handleDeleteCustomer, availableRoofers: availableRoofers })) })] }));
+    return (_jsxs(DashboardLayout, { currentPage: currentPage, onPageChange: handlePageChange, children: [_jsx(Customers, { customers: customers, onAddCustomer: handleAddCustomer, onEditCustomer: handleEditCustomer, isLoading: isLoading }), _jsx(Modal, { isOpen: showAddCustomer, onClose: () => setShowAddCustomer(false), title: "Add Customer", children: _jsx(AddCustomerForm, { onBack: () => setShowAddCustomer(false), onSubmit: handleAddCustomerSubmit, availableRoofers: availableRoofers }) }), _jsx(Modal, { isOpen: showEditCustomer, onClose: () => setShowEditCustomer(false), title: "Edit Customer", children: customerToEdit && (_jsx(EditCustomerForm, { customer: customerToEdit, onBack: () => setShowEditCustomer(false), onSubmit: handleEditCustomerSubmit, onDelete: handleDeleteCustomer, availableRoofers: availableRoofers })) })] }));
 };

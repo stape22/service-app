@@ -51,7 +51,7 @@
 * [x] Badge
 * [x] Calendar – styled per Figma
   * [x] [KNOWN ISSUE] Fix test runner/module resolution issue with cn utility import in Calendar and Button atoms (see dev-log.md) (Resolved: No cn import issue; react-day-picker does not render day grid in test env)
-  * [ ] [KNOWN ISSUE] Revisit Calendar atom tests after resolving cn import to ensure all tests pass and coverage is complete
+  * [x] [KNOWN ISSUE] Revisit Calendar atom tests after resolving cn import to ensure all tests pass and coverage is complete
 * [x] Popover – styled per Figma
 * [x] Avatar – ported from Figma, used in KanbanBoard and other components
 

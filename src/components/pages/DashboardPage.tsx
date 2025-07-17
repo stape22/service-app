@@ -7,18 +7,34 @@ import { JobsTable } from '../molecules/JobsTable';
 
 // Local jobs data for demonstration (should be replaced with real data source)
 const jobsData = [
-  { id: '#318', date: 'June 4, 2025', jobType: 'Install', status: 'scheduled', roofer: 'Mike Johnson', address: '1234 Oak Street', customer: 'John Smith' },
-  { id: '#319', date: 'June 5, 2025', jobType: 'Repair', status: 'to-schedule', roofer: 'Sarah Williams', address: '567 Pine Avenue', customer: 'Emily Davis' },
-  { id: '#320', date: 'June 5, 2025', jobType: 'Estimate', status: 'completed', roofer: 'David Chen', address: '890 Maple Drive', customer: 'Robert Johnson' },
-  { id: '#321', date: 'June 6, 2025', jobType: 'Install', status: 'in-progress', roofer: 'James Wilson', address: '123 Elm Court', customer: 'Patricia Brown' },
-  { id: '#322', date: 'June 7, 2025', jobType: 'Repair', status: 'scheduled', roofer: 'Lisa Martinez', address: '456 Cedar Lane', customer: 'Michael Wilson' },
-  { id: '#323', date: 'June 8, 2025', jobType: 'Cleaning', status: 'to-schedule', roofer: 'Thomas Anderson', address: '789 Birch Street', customer: 'Jennifer Taylor' },
+  { id: '#318', date: 'July 11, 2025', jobType: 'Roof Repair', status: 'scheduled', roofer: 'Mike Johnson', address: '1234 Oak Street', customer: 'John Smith' },
+  { id: '#319', date: 'July 15, 2025', jobType: 'Inspection', status: 'to-schedule', roofer: 'Sarah Williams', address: '567 Pine Avenue', customer: 'Emily Davis' },
+  { id: '#320', date: 'July 22, 2025', jobType: 'Installation', status: 'scheduled', roofer: 'David Chen', address: '890 Maple Drive', customer: 'Robert Johnson' },
+  { id: '#321', date: 'July 8, 2025', jobType: 'Cleaning', status: 'completed', roofer: 'James Wilson', address: '123 Elm Court', customer: 'Patricia Brown' },
+  { id: '#322', date: 'July 25, 2025', jobType: 'Repair', status: 'scheduled', roofer: 'Lisa Martinez', address: '456 Cedar Lane', customer: 'Michael Wilson' },
+  { id: '#323', date: 'August 5, 2025', jobType: 'Inspection', status: 'to-schedule', roofer: 'Thomas Anderson', address: '789 Birch Street', customer: 'Jennifer Taylor' },
+  { id: '#324', date: 'August 12, 2025', jobType: 'Installation', status: 'scheduled', roofer: 'Mike Johnson', address: '321 Pine Street', customer: 'William Davis' },
+  { id: '#325', date: 'August 18, 2025', jobType: 'Cleaning', status: 'to-schedule', roofer: 'Sarah Williams', address: '654 Oak Avenue', customer: 'Lisa Wilson' },
 ];
 
 const jobsForCalendar = jobsData.map(j => ({
   id: j.id,
   title: j.jobType,
-  type: (j.jobType.toLowerCase() as 'estimate' | 'install' | 'repair' | 'cleaning'),
+  type: (() => {
+    switch (j.jobType.toLowerCase()) {
+      case 'roof repair':
+      case 'repair':
+        return 'repair' as const;
+      case 'inspection':
+        return 'estimate' as const;
+      case 'installation':
+        return 'install' as const;
+      case 'cleaning':
+        return 'cleaning' as const;
+      default:
+        return 'repair' as const;
+    }
+  })(),
   date: new Date(j.date),
 }));
 

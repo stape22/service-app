@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from '../atoms/Button';
 import { Badge } from '../atoms/Badge';
-// TODO: Replace with atomic/organism Table implementation. See dev-log.md for rationale.
-// import { Table } from '../../../Figma Design/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../atoms/Table';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 
 export interface RooferData {
   id: number;
@@ -45,8 +45,17 @@ const getCertificationColor = (certification: string) => {
 };
 
 export const Roofers: React.FC<RoofersProps> = ({ roofers, onAddRoofer, onEditRoofer, onDeleteRoofer }) => {
-  const [sortField] = useState<SortField>('fullName');
-  const [sortDirection] = useState<SortDirection>('asc');
+  const [sortField, setSortField] = useState<SortField>('fullName');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+
+  const handleSort = (field: SortField) => {
+    if (field === sortField) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortDirection('asc');
+    }
+  };
 
   const sortedRoofers = [...roofers].sort((a, b) => {
     let aValue: string | number;
@@ -93,15 +102,14 @@ export const Roofers: React.FC<RoofersProps> = ({ roofers, onAddRoofer, onEditRo
     }
   });
 
-  // lucide-react not available; using Unicode arrows for sort icons. Replace with icons if/when available.
   const SortIcon = ({ field }: { field: SortField }) => {
     return (
       <span className="inline-flex items-center justify-center w-4 h-4 ml-2">
         {sortField === field ? (
           sortDirection === 'asc' ? (
-            <span className="text-gray-600">▲</span>
+            <ChevronUp className="h-4 w-4 text-gray-600" />
           ) : (
-            <span className="text-gray-600">▼</span>
+            <ChevronDown className="h-4 w-4 text-gray-600" />
           )
         ) : (
           <span className="text-gray-400 text-sm">↕</span>
@@ -130,82 +138,113 @@ export const Roofers: React.FC<RoofersProps> = ({ roofers, onAddRoofer, onEditRo
 
           {/* Roofers Table */}
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="bg-gray-50">
-              <div className="flex items-center justify-start">
-                Full Name
-                <SortIcon field="fullName" />
-              </div>
-            </div>
-            <div className="flex items-center justify-start">
-              Email Address
-              <SortIcon field="email" />
-            </div>
-            <div className="flex items-center justify-start">
-              Phone Number
-              <SortIcon field="phone" />
-            </div>
-            <div className="flex items-center justify-start">
-              Address
-              <SortIcon field="address" />
-            </div>
-            <div className="flex items-center justify-start">
-              Availability
-              <SortIcon field="availability" />
-            </div>
-            <div className="flex items-center justify-start">
-              Certifications
-              <span className="w-4 h-4 ml-2"></span>
-            </div>
-            <div className="flex items-center justify-end">
-              # of Contacts
-              <SortIcon field="contactCount" />
-            </div>
-            <div>
-              {sortedRoofers.map((roofer) => (
-                <div key={roofer.id} className="hover:bg-gray-50 p-2 border-b last:border-b-0 flex items-center">
-                  <div className="flex-1">
-                    <button 
-                      className="text-blue-600 hover:text-blue-800 hover:underline text-left"
-                      onClick={() => onEditRoofer(roofer)}
-                    >
-                      {roofer.fullName}
-                    </button>
-                  </div>
-                  <div className="flex-1 text-gray-900">{roofer.email}</div>
-                  <div className="flex-1 text-gray-900">{roofer.phone}</div>
-                  <div className="flex-1 text-gray-900">{roofer.address}</div>
-                  <div className="flex-1">
-                    <Badge
-                      variant="primary"
-                      className={`text-xs px-2 py-1 ${getAvailabilityColor(roofer.availability)}`}
-                    >
-                      {roofer.availability === 'full-time' ? 'Full-time' : 'Part-time'}
-                    </Badge>
-                  </div>
-                  <div className="flex-1 flex gap-1 flex-wrap">
-                    {roofer.certifications.map((cert, index) => (
-                      <Badge
-                        key={index}
-                        variant="primary"
-                        className={`text-xs px-2 py-1 ${getCertificationColor(cert)}`}
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-50">
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('fullName')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Full Name
+                      <SortIcon field="fullName" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('email')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Email Address
+                      <SortIcon field="email" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('phone')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Phone Number
+                      <SortIcon field="phone" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('address')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Address
+                      <SortIcon field="address" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('availability')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Availability
+                      <SortIcon field="availability" />
+                    </div>
+                  </TableHead>
+                  <TableHead className="font-medium text-gray-700">
+                    <div className="flex items-center justify-start">
+                      Certifications
+                      <span className="w-4 h-4 ml-2"></span>
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('contactCount')}
+                  >
+                    <div className="flex items-center justify-end">
+                      # of Contacts
+                      <SortIcon field="contactCount" />
+                    </div>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sortedRoofers.map((roofer) => (
+                  <TableRow key={roofer.id} className="hover:bg-gray-50">
+                    <TableCell>
+                      <button 
+                        className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                        onClick={() => onEditRoofer(roofer)}
                       >
-                        {cert}
+                        {roofer.fullName}
+                      </button>
+                    </TableCell>
+                    <TableCell className="text-gray-900">{roofer.email}</TableCell>
+                    <TableCell className="text-gray-900">{roofer.phone}</TableCell>
+                    <TableCell className="text-gray-900">{roofer.address}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant="outline"
+                        className={`text-xs px-2 py-1 ${getAvailabilityColor(roofer.availability)}`}
+                      >
+                        {roofer.availability === 'full-time' ? 'Full-time' : 'Part-time'}
                       </Badge>
-                    ))}
-                  </div>
-                  <div className="flex-1 text-right text-gray-900">{roofer.contactCount}</div>
-                  {onDeleteRoofer && (
-                    <Button
-                      variant="outline"
-                      className="ml-2 text-red-600 border-red-200 hover:bg-red-50"
-                      onClick={() => onDeleteRoofer(roofer.id)}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </div>
-              ))}
-            </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1 flex-wrap">
+                        {roofer.certifications.map((cert, index) => (
+                          <Badge
+                            key={index}
+                            variant="outline"
+                            className={`text-xs px-2 py-1 ${getCertificationColor(cert)}`}
+                          >
+                            {cert}
+                          </Badge>
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-right text-gray-900">
+                      {roofer.contactCount}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </div>
       </main>

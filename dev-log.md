@@ -848,3 +848,26 @@ Refactored DashboardPage to display all job views (calendar, table, kanban place
   - Maintains atomic design principles and accessibility standards
   - Ensures visual consistency with design system
   - Provides comprehensive test coverage for all new features
+
+## [2024-12-19T15:30:00Z] [AI: Cursor Agent]
+
+### Customers Page Layout Update - Figma Design Implementation
+- **Files:** src/components/organisms/Customers.tsx
+- **Summary:**
+  - Updated Customers organism to match Figma design specifications exactly:
+    - Reordered table columns to match Figma: Full Name, Email, Phone, Address, Type, Status, Jobs, Last Contact, Assigned Roofer, Edit
+    - Updated column labels to match Figma: "Customer Name" → "Full Name", "Email Address" → "Email", "Phone Number" → "Phone", "# of Jobs" → "Jobs"
+    - Added dedicated "Edit" column with centered Edit button for each row
+    - Moved "Jobs" and "Last Contact" columns before "Assigned Roofer" to match Figma layout
+    - Maintained all existing functionality including sorting, badges, and interactive elements
+    - Preserved responsive design and accessibility features
+  - Design tokens and styling maintained:
+    - Badge colors: blue/purple for customer types, green/gray for status, orange for assigned roofers
+    - Typography: text-gray-900 for data, text-gray-700 for headers
+    - Spacing: px-4 py-2 for cells, proper hover states
+    - Interactive elements: sort indicators, clickable customer names, Edit buttons
+- **Context:**
+  - Fulfills requirement to update Customers page layout and styles to fully match Figma design
+  - Maintains atomic design principles and component structure
+  - Ensures visual consistency with design system
+  - Preserves all existing functionality while matching exact Figma specifications

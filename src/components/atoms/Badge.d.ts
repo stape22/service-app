@@ -1,5 +1,5 @@
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-    variant?: 'default' | 'primary' | 'secondary' | 'accent' | 'ghost' | 'info' | 'success' | 'warning' | 'error';
+    variant?: 'default' | 'primary' | 'secondary' | 'accent' | 'ghost' | 'info' | 'success' | 'warning' | 'error' | 'outline';
     size?: 'sm' | 'md' | 'lg';
     children: React.ReactNode;
 }

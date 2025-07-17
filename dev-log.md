@@ -817,3 +817,34 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
 **Files/Scope:** DashboardPage.tsx, JobsPage.tsx, JobsCalendar.tsx, JobsTable.tsx, KanbanBoard.tsx
 **Summary:**
 Refactored DashboardPage to display all job views (calendar, table, kanban placeholder) using atomic/organism components and local jobs data. Refactored JobsPage to remove all job views, keeping only add, edit, and delete job management features and modals. Updated JobsTable to make edit/delete actions optional for view-only use in Dashboard. Marked related subtasks as complete in tasks.md.
+
+## [2024-07-16T15:00:00Z] [AI: Cursor Agent]
+
+### Dashboard Calendar Component - Figma Design Implementation
+- **Files:** src/components/organisms/JobsCalendar.tsx, src/components/organisms/JobsCalendar.test.tsx, src/components/pages/DashboardPage.tsx
+- **Summary:**
+  - Updated JobsCalendar organism to match Figma design specifications:
+    - Added "Today" badge next to current date with blue styling
+    - Updated job display format to show "ID - Title" (e.g., "#318 - Roof Repair")
+    - Added calendar legend at bottom showing color coding for job types
+    - Replaced HTML arrow entities with proper ChevronLeft/ChevronRight icons from lucide-react
+    - Enhanced today's date styling with blue text and ring highlight
+    - Updated job data in DashboardPage to use more descriptive titles matching Figma
+  - Updated JobsCalendar tests to match new implementation:
+    - Updated job ID format in test data
+    - Updated test assertions for new job display format
+    - Added test for calendar legend rendering
+    - Fixed navigation button test to work with chevron icons
+  - Design tokens used:
+    - Colors: blue-50, blue-100, blue-200, blue-600, blue-700, blue-800 (repair jobs)
+    - Colors: indigo-100, indigo-200, indigo-800 (estimate jobs)
+    - Colors: orange-100, orange-200, orange-800 (install jobs)
+    - Colors: purple-100, purple-200, purple-800 (cleaning jobs)
+    - Spacing: p-2, p-4, space-x-1, space-x-2, space-x-4, space-x-6
+    - Typography: text-xs, text-sm, text-xl, font-semibold
+    - Layout: min-h-[120px], grid-cols-7, flex-1
+- **Context:**
+  - Fulfills requirement to build and style calendar component based on Figma design
+  - Maintains atomic design principles and accessibility standards
+  - Ensures visual consistency with design system
+  - Provides comprehensive test coverage for all new features

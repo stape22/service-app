@@ -5,13 +5,13 @@ import type { Job } from './JobsCalendar';
 describe('JobsCalendar', () => {
   const jobs: Job[] = [
     {
-      id: '1',
+      id: '#318',
       title: 'Install',
       type: 'install',
       date: new Date(2025, 5, 4), // June 4, 2025
     },
     {
-      id: '2',
+      id: '#319',
       title: 'Repair',
       type: 'repair',
       date: new Date(2025, 5, 5), // June 5, 2025
@@ -28,17 +28,26 @@ describe('JobsCalendar', () => {
 
   it('renders job badges on correct dates', () => {
     render(<JobsCalendar jobs={jobs} />);
-    // Find a badge for Install job
-    expect(screen.getByText('Install')).toBeInTheDocument();
-    // Find a badge for Repair job
-    expect(screen.getByText('Repair')).toBeInTheDocument();
+    // Find a badge for Install job with ID and title
+    expect(screen.getByText('#318 - Install')).toBeInTheDocument();
+    // Find a badge for Repair job with ID and title
+    expect(screen.getByText('#319 - Repair')).toBeInTheDocument();
   });
 
   it('navigates months when nav buttons are clicked', () => {
     render(<JobsCalendar jobs={jobs} />);
-    const nextBtn = screen.getAllByRole('button', { name: /→/ })[0];
+    // Find the next button by looking for the chevron right icon
+    const nextBtn = screen.getAllByRole('button')[2]; // Third button (Today, Prev, Next)
     fireEvent.click(nextBtn);
     // Should update the month (not asserting text, just that it doesn't crash)
     expect(screen.getByText('Today')).toBeInTheDocument();
+  });
+
+  it('renders calendar legend', () => {
+    render(<JobsCalendar jobs={jobs} />);
+    expect(screen.getByText('Repair')).toBeInTheDocument();
+    expect(screen.getByText('Estimate')).toBeInTheDocument();
+    expect(screen.getByText('Install')).toBeInTheDocument();
+    expect(screen.getByText('Cleaning')).toBeInTheDocument();
   });
 }); 

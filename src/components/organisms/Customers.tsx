@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 import { Button } from '../atoms/Button';
+import { Badge } from '../atoms/Badge';
 import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '../atoms/Table';
-// TODO: Replace with atomic/organism Table implementation. See dev-log.md for rationale.
-// import { Table } from '../../../Figma Design/components/ui/table';
 
 export interface CustomerData {
   id: number;
@@ -104,15 +104,14 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
     }
   });
 
-  // Unicode arrows for sort icons (replace with icons if/when available)
   const SortIcon = ({ field }: { field: SortField }) => {
     return (
       <span className="inline-flex items-center justify-center w-4 h-4 ml-2">
         {sortField === field ? (
           sortDirection === 'asc' ? (
-            <span className="text-gray-600">▲</span>
+            <ChevronUp className="h-4 w-4 text-gray-600" />
           ) : (
-            <span className="text-gray-600">▼</span>
+            <ChevronDown className="h-4 w-4 text-gray-600" />
           )
         ) : (
           <span className="text-gray-400 text-sm">↕</span>
@@ -138,47 +137,145 @@ export const Customers: React.FC<CustomersProps> = ({ customers, onAddCustomer, 
               Add Customer
             </Button>
           </div>
-          {/* Table Body */}
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead onClick={() => handleSort('fullName')}>Full Name<SortIcon field="fullName" /></TableHead>
-                <TableHead onClick={() => handleSort('email')}>Email<SortIcon field="email" /></TableHead>
-                <TableHead onClick={() => handleSort('phone')}>Phone<SortIcon field="phone" /></TableHead>
-                <TableHead onClick={() => handleSort('address')}>Address<SortIcon field="address" /></TableHead>
-                <TableHead onClick={() => handleSort('customerType')}>Type<SortIcon field="customerType" /></TableHead>
-                <TableHead onClick={() => handleSort('status')}>Status<SortIcon field="status" /></TableHead>
-                <TableHead onClick={() => handleSort('jobCount')}>Jobs<SortIcon field="jobCount" /></TableHead>
-                <TableHead onClick={() => handleSort('lastContact')}>Last Contact<SortIcon field="lastContact" /></TableHead>
-                <TableHead>Assigned Roofer</TableHead>
-                <TableHead>Edit</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {sortedCustomers.map((customer) => (
-                <TableRow key={customer.id}>
-                  <TableCell>{customer.fullName}</TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>{customer.phone}</TableCell>
-                  <TableCell>{customer.address}</TableCell>
-                  <TableCell>
-                    <span className={`px-2 py-1 rounded ${getCustomerTypeColor(customer.customerType)}`}>{customer.customerType.charAt(0).toUpperCase() + customer.customerType.slice(1)}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className={`px-2 py-1 rounded ${getStatusColor(customer.status)}`}>{customer.status.charAt(0).toUpperCase() + customer.status.slice(1)}</span>
-                  </TableCell>
-                  <TableCell>{customer.jobCount}</TableCell>
-                  <TableCell>{customer.lastContact}</TableCell>
-                  <TableCell>{customer.assignedRoofer || '-'}</TableCell>
-                  <TableCell>
-                    <Button variant="outline" size="sm" onClick={() => onEditCustomer(customer)}>
-                      Edit
-                    </Button>
-                  </TableCell>
+
+          {/* Customers Table */}
+          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-50">
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('fullName')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Customer Name
+                      <SortIcon field="fullName" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('email')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Email Address
+                      <SortIcon field="email" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('phone')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Phone Number
+                      <SortIcon field="phone" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('address')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Address
+                      <SortIcon field="address" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('customerType')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Type
+                      <SortIcon field="customerType" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('status')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Status
+                      <SortIcon field="status" />
+                    </div>
+                  </TableHead>
+                  <TableHead className="font-medium text-gray-700">
+                    <div className="flex items-center justify-start">
+                      Assigned Roofer
+                      <span className="w-4 h-4 ml-2"></span>
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('jobCount')}
+                  >
+                    <div className="flex items-center justify-end">
+                      # of Jobs
+                      <SortIcon field="jobCount" />
+                    </div>
+                  </TableHead>
+                  <TableHead 
+                    className="font-medium text-gray-700 cursor-pointer hover:bg-gray-100 select-none"
+                    onClick={() => handleSort('lastContact')}
+                  >
+                    <div className="flex items-center justify-start">
+                      Last Contact
+                      <SortIcon field="lastContact" />
+                    </div>
+                  </TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {sortedCustomers.map((customer) => (
+                  <TableRow key={customer.id} className="hover:bg-gray-50">
+                    <TableCell>
+                      <button 
+                        className="text-blue-600 hover:text-blue-800 hover:underline text-left"
+                        onClick={() => onEditCustomer(customer)}
+                      >
+                        {customer.fullName}
+                      </button>
+                    </TableCell>
+                    <TableCell className="text-gray-900">{customer.email}</TableCell>
+                    <TableCell className="text-gray-900">{customer.phone}</TableCell>
+                    <TableCell className="text-gray-900">{customer.address}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant="outline"
+                        className={`text-xs px-2 py-1 ${getCustomerTypeColor(customer.customerType)}`}
+                      >
+                        {customer.customerType === 'residential' ? 'Residential' : 'Commercial'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant="outline"
+                        className={`text-xs px-2 py-1 ${getStatusColor(customer.status)}`}
+                      >
+                        {customer.status === 'active' ? 'Active' : 'Inactive'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      {customer.assignedRoofer ? (
+                        <Badge
+                          variant="outline"
+                          className="text-xs px-2 py-1 bg-orange-100 text-orange-800 border-orange-200"
+                        >
+                          {customer.assignedRoofer}
+                        </Badge>
+                      ) : (
+                        <span className="text-gray-400 text-sm">No roofer assigned</span>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-right text-gray-900">
+                      {customer.jobCount}
+                    </TableCell>
+                    <TableCell className="text-gray-900">
+                      {new Date(customer.lastContact).toLocaleDateString()}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </main>
     </div>

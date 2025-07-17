@@ -817,3 +817,25 @@ Port the Calendar primitive from Figma Design/components/ui/ to `src/components/
 **Files/Scope:** DashboardPage.tsx, JobsPage.tsx, JobsCalendar.tsx, JobsTable.tsx, KanbanBoard.tsx
 **Summary:**
 Refactored DashboardPage to display all job views (calendar, table, kanban placeholder) using atomic/organism components and local jobs data. Refactored JobsPage to remove all job views, keeping only add, edit, and delete job management features and modals. Updated JobsTable to make edit/delete actions optional for view-only use in Dashboard. Marked related subtasks as complete in tasks.md.
+
+## [2024-12-19T15:30:00Z] [AI: Cursor Agent]
+
+### Customers Page UI Update - Figma Design Implementation
+- **Files:** src/components/organisms/Customers.tsx, src/components/atoms/Badge.tsx, src/components/organisms/Customers.test.tsx
+- **Summary:**
+  - Updated the Customers organism to match the Figma design exactly, including proper styling, layout, sorting icons, and table structure.
+  - Added lucide-react ChevronUp and ChevronDown icons for sorting functionality to replace Unicode arrows.
+  - Updated Badge atom to support 'outline' variant and improved styling to match Figma design tokens.
+  - Restructured table layout to match Figma design with proper column headers, sorting functionality, and clickable customer names.
+  - Updated Customers test to match new structure with updated header names and clickable customer names instead of Edit buttons.
+  - The Customers page now matches the Figma design with proper styling, responsive layout, and interactive elements.
+- **Design Tokens Applied:**
+  - Gray color scheme (bg-gray-50, text-gray-900, etc.)
+  - Blue accent colors for buttons and links
+  - Proper spacing and typography matching Figma
+  - Badge styling for customer types and status
+  - Table styling with hover states and proper borders
+- **Context:**
+  - Fulfills the requirement to update the Customers page UI to match Figma designs as specified in the user request.
+  - Follows atomic design principles and maintains project conventions per rules.md.
+  - Ensures proper test coverage and accessibility standards.

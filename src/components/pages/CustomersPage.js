@@ -1,19 +1,127 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
 import { DashboardLayout } from '../templates/DashboardLayout';
 import { Customers } from '../organisms/Customers';
+import { AddCustomerForm } from '../molecules/AddCustomerForm';
+import { EditCustomerForm } from '../molecules/EditCustomerForm';
+import { Modal } from '../atoms/Modal';
+const initialCustomers = [
+    {
+        id: 1,
+        fullName: 'John Smith',
+        email: 'john.smith@email.com',
+        phone: '(555) 123-4567',
+        address: '123 Main Street, Springfield, IL 62701',
+        customerType: 'residential',
+        status: 'active',
+        jobCount: 3,
+        lastContact: '2024-01-15',
+        assignedRoofer: 'Michael Rodriguez'
+    },
+    {
+        id: 2,
+        fullName: 'ABC Corporation',
+        email: 'contact@abccorp.com',
+        phone: '(555) 987-6543',
+        address: '456 Business Ave, Chicago, IL 60601',
+        customerType: 'commercial',
+        status: 'active',
+        jobCount: 8,
+        lastContact: '2024-01-20',
+        assignedRoofer: 'Sarah Johnson'
+    },
+    {
+        id: 3,
+        fullName: 'Maria Garcia',
+        email: 'maria.garcia@email.com',
+        phone: '(555) 234-5678',
+        address: '789 Oak Drive, Peoria, IL 61602',
+        customerType: 'residential',
+        status: 'active',
+        jobCount: 1,
+        lastContact: '2024-01-10',
+        assignedRoofer: 'David Thompson'
+    },
+    {
+        id: 4,
+        fullName: 'Tech Solutions Inc.',
+        email: 'info@techsolutions.com',
+        phone: '(555) 345-6789',
+        address: '321 Corporate Blvd, Rockford, IL 61101',
+        customerType: 'commercial',
+        status: 'inactive',
+        jobCount: 0,
+        lastContact: '2023-12-05',
+        assignedRoofer: null
+    },
+    {
+        id: 5,
+        fullName: 'Robert Johnson',
+        email: 'rob.johnson@email.com',
+        phone: '(555) 456-7890',
+        address: '654 Pine Street, Decatur, IL 62521',
+        customerType: 'residential',
+        status: 'active',
+        jobCount: 5,
+        lastContact: '2024-01-18',
+        assignedRoofer: 'Jennifer Martinez'
+    }
+];
+const availableRoofers = [
+    'Michael Rodriguez',
+    'Sarah Johnson',
+    'David Thompson',
+    'Jennifer Martinez',
+    'Robert Wilson'
+];
 export const CustomersPage = () => {
     const [currentPage, setCurrentPage] = useState('customers');
-    // Handlers for navigation and chat
+    const [customers, setCustomers] = useState(initialCustomers);
+    const [showAddCustomer, setShowAddCustomer] = useState(false);
+    const [showEditCustomer, setShowEditCustomer] = useState(false);
+    const [customerToEdit, setCustomerToEdit] = useState(null);
     const handlePageChange = (page) => setCurrentPage(page);
-    // Placeholder handlers for add/edit customer (to be implemented in future tasks)
-    const handleAddCustomer = () => {
-        // TODO: Implement add customer flow
-        alert('Add Customer clicked (to be implemented)');
+    const handleAddCustomer = () => setShowAddCustomer(true);
+    const handleAddCustomerSubmit = (data) => {
+        setCustomers(prev => [
+            ...prev,
+            {
+                id: Date.now(),
+                fullName: data.customerName,
+                email: data.email,
+                phone: data.phone,
+                address: `${data.streetAddress}, ${data.city}, ${data.state} ${data.zipCode}`,
+                customerType: data.customerType,
+                status: 'active',
+                jobCount: 0,
+                lastContact: new Date().toISOString().slice(0, 10),
+                assignedRoofer: data.assignedRoofer || null
+            }
+        ]);
     };
-    const handleEditCustomer = () => {
-        // TODO: Implement edit customer flow
-        alert('Edit Customer clicked (to be implemented)');
+    const handleEditCustomer = (customer) => {
+        setCustomerToEdit(customer);
+        setShowEditCustomer(true);
     };
-    return (_jsx(DashboardLayout, { currentPage: currentPage, onPageChange: handlePageChange, children: _jsx(Customers, { onAddCustomer: handleAddCustomer, onEditCustomer: handleEditCustomer }) }));
+    const handleEditCustomerSubmit = (data) => {
+        setCustomers(prev => prev.map(c => c.id === data.id
+            ? {
+                ...c,
+                fullName: data.customerName,
+                email: data.email,
+                phone: data.phone,
+                address: `${data.streetAddress}, ${data.city}, ${data.state} ${data.zipCode}`,
+                customerType: data.customerType,
+                assignedRoofer: data.assignedRoofer || null
+            }
+            : c));
+        setShowEditCustomer(false);
+        setCustomerToEdit(null);
+    };
+    const handleDeleteCustomer = (id) => {
+        setCustomers(prev => prev.filter(c => c.id !== id));
+        setShowEditCustomer(false);
+        setCustomerToEdit(null);
+    };
+    return (_jsxs(DashboardLayout, { currentPage: currentPage, onPageChange: handlePageChange, children: [_jsx(Customers, { customers: customers, onAddCustomer: handleAddCustomer, onEditCustomer: handleEditCustomer }), _jsx(Modal, { isOpen: showAddCustomer, onClose: () => setShowAddCustomer(false), title: "Add Customer", children: _jsx(AddCustomerForm, { onBack: () => setShowAddCustomer(false), onSubmit: handleAddCustomerSubmit, availableRoofers: availableRoofers }) }), _jsx(Modal, { isOpen: showEditCustomer, onClose: () => setShowEditCustomer(false), title: "Edit Customer", children: customerToEdit && (_jsx(EditCustomerForm, { customer: customerToEdit, onBack: () => setShowEditCustomer(false), onSubmit: handleEditCustomerSubmit, onDelete: handleDeleteCustomer, availableRoofers: availableRoofers })) })] }));
 };

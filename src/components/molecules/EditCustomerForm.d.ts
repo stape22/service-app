@@ -11,10 +11,11 @@ export interface CustomerData {
     lastContact: string;
     assignedRoofer: string | null;
 }
-interface CustomersProps {
-    customers: CustomerData[];
-    onAddCustomer: () => void;
-    onEditCustomer: (customer: CustomerData) => void;
+export interface EditCustomerFormProps {
+    customer: CustomerData;
+    onBack: () => void;
+    onSubmit?: (data: any) => void;
+    onDelete?: (id: number) => void;
+    availableRoofers?: string[];
 }
-export declare const Customers: React.FC<CustomersProps>;
-export {};
+export declare const EditCustomerForm: React.FC<EditCustomerFormProps>;
